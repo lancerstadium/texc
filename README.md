@@ -5,7 +5,7 @@
     - Edit text file;
     - Basic highlight syntax for C/CPP.
 
-- Show: 
+- Show: more detail on [Website](https://lancerstadium.github.io/texc)
     ![texc](./docs/texc.png)
 
 - Texc's [Docs Page](./html/index.html)
