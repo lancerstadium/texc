@@ -1,0 +1,1460 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>texc: src/main.c 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">texc
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('main_8c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">类</a> &#124;
+<a href="#define-members">宏定义</a> &#124;
+<a href="#typedef-members">类型定义</a> &#124;
+<a href="#enum-members">枚举</a> &#124;
+<a href="#func-members">函数</a> &#124;
+<a href="#var-members">变量</a>  </div>
+  <div class="headertitle"><div class="title">main.c 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>主程序入口  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;ctype.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;stdarg.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;sys/ioctl.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;termios.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structesyn.html">esyn</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">对特定文件类型的语法突出显示信息  <a href="structesyn.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structerow.html">erow</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器行  <a href="structerow.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structeditor__config.html">editor_config</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器配置结构体，保存了编辑器的信息。  <a href="structeditor__config.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structabuf.html">abuf</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">追加缓冲区结构体  <a href="structabuf.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:a8fb447618db946a9e2a596d9ea18763f" id="r_a8fb447618db946a9e2a596d9ea18763f"><td class="memItemLeft" align="right" valign="top"><a id="a8fb447618db946a9e2a596d9ea18763f" name="a8fb447618db946a9e2a596d9ea18763f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>_DEFAULT_SOURCE</b></td></tr>
+<tr class="separator:a8fb447618db946a9e2a596d9ea18763f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3d8a3bd0c0b677acef144f2c2ef6d73" id="r_ad3d8a3bd0c0b677acef144f2c2ef6d73"><td class="memItemLeft" align="right" valign="top"><a id="ad3d8a3bd0c0b677acef144f2c2ef6d73" name="ad3d8a3bd0c0b677acef144f2c2ef6d73"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>_BSD_SOURCE</b></td></tr>
+<tr class="separator:ad3d8a3bd0c0b677acef144f2c2ef6d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a369266c24eacffb87046522897a570d5" id="r_a369266c24eacffb87046522897a570d5"><td class="memItemLeft" align="right" valign="top"><a id="a369266c24eacffb87046522897a570d5" name="a369266c24eacffb87046522897a570d5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>_GNU_SOURCE</b></td></tr>
+<tr class="separator:a369266c24eacffb87046522897a570d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab00b3e840654ae945c059938b17b375f" id="r_ab00b3e840654ae945c059938b17b375f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab00b3e840654ae945c059938b17b375f">TEXC_VERSION</a>&#160;&#160;&#160;&quot;0.0.1&quot;</td></tr>
+<tr class="separator:ab00b3e840654ae945c059938b17b375f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ad38d024c3548be5f50d7fc0679664a" id="r_a6ad38d024c3548be5f50d7fc0679664a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ad38d024c3548be5f50d7fc0679664a">CTRL_KEY</a>(k)&#160;&#160;&#160;((k) &amp; 0x1f)</td></tr>
+<tr class="separator:a6ad38d024c3548be5f50d7fc0679664a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc269b479b18fbda6ce99bd682d2280e" id="r_acc269b479b18fbda6ce99bd682d2280e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acc269b479b18fbda6ce99bd682d2280e">TAB_STOP</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:acc269b479b18fbda6ce99bd682d2280e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03d3f54c622fea475aef39f7195ec842" id="r_a03d3f54c622fea475aef39f7195ec842"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a03d3f54c622fea475aef39f7195ec842">QUIT_TIMES</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a03d3f54c622fea475aef39f7195ec842"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad86a68ed5bc97d62e81d76604fa5a62d" id="r_ad86a68ed5bc97d62e81d76604fa5a62d"><td class="memItemLeft" align="right" valign="top"><a id="ad86a68ed5bc97d62e81d76604fa5a62d" name="ad86a68ed5bc97d62e81d76604fa5a62d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>HL_SYN_NUMBERS</b>&#160;&#160;&#160;(1 &lt;&lt; 0)</td></tr>
+<tr class="separator:ad86a68ed5bc97d62e81d76604fa5a62d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a798a54cb864d6662589247feeceef487" id="r_a798a54cb864d6662589247feeceef487"><td class="memItemLeft" align="right" valign="top"><a id="a798a54cb864d6662589247feeceef487" name="a798a54cb864d6662589247feeceef487"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>HL_SYN_STRINGS</b>&#160;&#160;&#160;(1 &lt;&lt; 1)</td></tr>
+<tr class="separator:a798a54cb864d6662589247feeceef487"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac72d068a4180c7a8e9ea0feebc0013ef" id="r_ac72d068a4180c7a8e9ea0feebc0013ef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac72d068a4180c7a8e9ea0feebc0013ef">HLDB_ENTRIES</a>&#160;&#160;&#160;(sizeof(<a class="el" href="#ab528a290dca979d323e7f394addcda06">HLDB</a>) / sizeof(<a class="el" href="#ab528a290dca979d323e7f394addcda06">HLDB</a>[0]))</td></tr>
+<tr class="separator:ac72d068a4180c7a8e9ea0feebc0013ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a338375e0d9379e2c297acac89c4049e7" id="r_a338375e0d9379e2c297acac89c4049e7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a338375e0d9379e2c297acac89c4049e7">ABUF_INIT</a>&#160;&#160;&#160;{NULL, 0}</td></tr>
+<tr class="separator:a338375e0d9379e2c297acac89c4049e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+类型定义</h2></td></tr>
+<tr class="memitem:a4b331922880c1076c8a24808e021a1d8" id="r_a4b331922880c1076c8a24808e021a1d8"><td class="memItemLeft" align="right" valign="top"><a id="a4b331922880c1076c8a24808e021a1d8" name="a4b331922880c1076c8a24808e021a1d8"></a>
+typedef struct <a class="el" href="structesyn.html">esyn</a>&#160;</td><td class="memItemRight" valign="bottom"><b>esyn_t</b></td></tr>
+<tr class="memdesc:a4b331922880c1076c8a24808e021a1d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">对特定文件类型的语法突出显示信息 <br /></td></tr>
+<tr class="separator:a4b331922880c1076c8a24808e021a1d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3286f23de1bf8554398edc8987b6d587" id="r_a3286f23de1bf8554398edc8987b6d587"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structerow.html">erow</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a></td></tr>
+<tr class="memdesc:a3286f23de1bf8554398edc8987b6d587"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器行  <br /></td></tr>
+<tr class="separator:a3286f23de1bf8554398edc8987b6d587"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c9bd350cced73f0e92cafebcb8bf1ec" id="r_a9c9bd350cced73f0e92cafebcb8bf1ec"><td class="memItemLeft" align="right" valign="top"><a id="a9c9bd350cced73f0e92cafebcb8bf1ec" name="a9c9bd350cced73f0e92cafebcb8bf1ec"></a>
+typedef struct <a class="el" href="structeditor__config.html">editor_config</a>&#160;</td><td class="memItemRight" valign="bottom"><b>editor_config_t</b></td></tr>
+<tr class="memdesc:a9c9bd350cced73f0e92cafebcb8bf1ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器配置结构体，保存了编辑器的信息。 <br /></td></tr>
+<tr class="separator:a9c9bd350cced73f0e92cafebcb8bf1ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a625087503a734e044bf9d7a087e8826e" id="r_a625087503a734e044bf9d7a087e8826e"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structabuf.html">abuf</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a625087503a734e044bf9d7a087e8826e">abuf_t</a></td></tr>
+<tr class="memdesc:a625087503a734e044bf9d7a087e8826e"><td class="mdescLeft">&#160;</td><td class="mdescRight">追加缓冲区结构体  <br /></td></tr>
+<tr class="separator:a625087503a734e044bf9d7a087e8826e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+枚举</h2></td></tr>
+<tr class="memitem:ae8516053d564d4f1040e8f69d2f5e1a8" id="r_ae8516053d564d4f1040e8f69d2f5e1a8"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8516053d564d4f1040e8f69d2f5e1a8">editor_key</a> { <br />
+&#160;&#160;<b>BACK_SPACE</b> = 127
+, <b>ARROW_LEFT</b> = 1000
+, <b>ARROW_RIGHT</b>
+, <b>ARROW_UP</b>
+, <br />
+&#160;&#160;<b>ARROW_DOWN</b>
+, <b>DEL_KEY</b>
+, <b>HOME_KEY</b>
+, <b>END_KEY</b>
+, <br />
+&#160;&#160;<b>PAGE_UP</b>
+, <b>PAGE_DOWN</b>
+<br />
+ }</td></tr>
+<tr class="memdesc:ae8516053d564d4f1040e8f69d2f5e1a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器控制键入配置  <a href="#ae8516053d564d4f1040e8f69d2f5e1a8">更多...</a><br /></td></tr>
+<tr class="separator:ae8516053d564d4f1040e8f69d2f5e1a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81ce53abcfc3abad013b2858b3e91f3c" id="r_a81ce53abcfc3abad013b2858b3e91f3c"><td class="memItemLeft" align="right" valign="top"><a id="a81ce53abcfc3abad013b2858b3e91f3c" name="a81ce53abcfc3abad013b2858b3e91f3c"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>editor_highlight</b> { <br />
+&#160;&#160;<b>HL_NORMAL</b> = 0
+, <b>HL_STRING</b>
+, <b>HL_NUMBER</b>
+, <b>HL_COMMENT</b>
+, <br />
+&#160;&#160;<b>HL_MLCOMMENT</b>
+, <b>HL_KEYWORD1</b>
+, <b>HL_KEYWORD2</b>
+, <b>HL_MATCH</b>
+<br />
+ }</td></tr>
+<tr class="separator:a81ce53abcfc3abad013b2858b3e91f3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:a902759df5a103aee802ea2e2af83ecfe" id="r_a902759df5a103aee802ea2e2af83ecfe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a902759df5a103aee802ea2e2af83ecfe">abuf_append</a> (<a class="el" href="#a625087503a734e044bf9d7a087e8826e">abuf_t</a> *ab, const char *s, int len)</td></tr>
+<tr class="memdesc:a902759df5a103aee802ea2e2af83ecfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">缓冲区追加字符串  <br /></td></tr>
+<tr class="separator:a902759df5a103aee802ea2e2af83ecfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f3dd675042479bb08c01fac07ba5887" id="r_a2f3dd675042479bb08c01fac07ba5887"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f3dd675042479bb08c01fac07ba5887">abuf_free</a> (<a class="el" href="#a625087503a734e044bf9d7a087e8826e">abuf_t</a> *ab)</td></tr>
+<tr class="memdesc:a2f3dd675042479bb08c01fac07ba5887"><td class="mdescLeft">&#160;</td><td class="mdescRight">释放追加缓冲区  <br /></td></tr>
+<tr class="separator:a2f3dd675042479bb08c01fac07ba5887"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a902068fc1db96a09b049e0eef1ef09d4" id="r_a902068fc1db96a09b049e0eef1ef09d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a902068fc1db96a09b049e0eef1ef09d4">editor_set_status_msg</a> (const char *fmt,...)</td></tr>
+<tr class="memdesc:a902068fc1db96a09b049e0eef1ef09d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器设置状态栏消息  <br /></td></tr>
+<tr class="separator:a902068fc1db96a09b049e0eef1ef09d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e241125e49d43bfb08d9509915dd406" id="r_a5e241125e49d43bfb08d9509915dd406"><td class="memItemLeft" align="right" valign="top"><a id="a5e241125e49d43bfb08d9509915dd406" name="a5e241125e49d43bfb08d9509915dd406"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>editor_refresh_screen</b> ()</td></tr>
+<tr class="memdesc:a5e241125e49d43bfb08d9509915dd406"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器清除屏幕 <br /></td></tr>
+<tr class="separator:a5e241125e49d43bfb08d9509915dd406"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8ec1c7e504dbf78cf565f0cd66cbafd" id="r_ab8ec1c7e504dbf78cf565f0cd66cbafd"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab8ec1c7e504dbf78cf565f0cd66cbafd">editor_prompt</a> (char *prompt, void(*callback)(char *, int))</td></tr>
+<tr class="memdesc:ab8ec1c7e504dbf78cf565f0cd66cbafd"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器显示提示，提供文本输入  <br /></td></tr>
+<tr class="separator:ab8ec1c7e504dbf78cf565f0cd66cbafd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a465bed984e3f89d3fbd759706aa9b03f" id="r_a465bed984e3f89d3fbd759706aa9b03f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a465bed984e3f89d3fbd759706aa9b03f">fatal</a> (const char *s)</td></tr>
+<tr class="memdesc:a465bed984e3f89d3fbd759706aa9b03f"><td class="mdescLeft">&#160;</td><td class="mdescRight">错误处理：打印错误信息  <br /></td></tr>
+<tr class="separator:a465bed984e3f89d3fbd759706aa9b03f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe709e6bcc6b857e4f01fd60b6428fad" id="r_abe709e6bcc6b857e4f01fd60b6428fad"><td class="memItemLeft" align="right" valign="top"><a id="abe709e6bcc6b857e4f01fd60b6428fad" name="abe709e6bcc6b857e4f01fd60b6428fad"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>disable_raw_mode</b> ()</td></tr>
+<tr class="memdesc:abe709e6bcc6b857e4f01fd60b6428fad"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭原始文本模式：参考<code>enable_raw_mode</code> <br /></td></tr>
+<tr class="separator:abe709e6bcc6b857e4f01fd60b6428fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a387166a0b91006891f6f339e47a07191" id="r_a387166a0b91006891f6f339e47a07191"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a387166a0b91006891f6f339e47a07191">enable_raw_mode</a> ()</td></tr>
+<tr class="memdesc:a387166a0b91006891f6f339e47a07191"><td class="mdescLeft">&#160;</td><td class="mdescRight">开启原始文本模式  <br /></td></tr>
+<tr class="separator:a387166a0b91006891f6f339e47a07191"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af89f5cc3c97a546a3b0f01c1d84ef78c" id="r_af89f5cc3c97a546a3b0f01c1d84ef78c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af89f5cc3c97a546a3b0f01c1d84ef78c">editor_read_key</a> ()</td></tr>
+<tr class="memdesc:af89f5cc3c97a546a3b0f01c1d84ef78c"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器读取键入  <br /></td></tr>
+<tr class="separator:af89f5cc3c97a546a3b0f01c1d84ef78c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17caa6f28f0fbd3c7bf35756e0920af4" id="r_a17caa6f28f0fbd3c7bf35756e0920af4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a17caa6f28f0fbd3c7bf35756e0920af4">get_cursor_position</a> (int *rows, int *cols)</td></tr>
+<tr class="memdesc:a17caa6f28f0fbd3c7bf35756e0920af4"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取光标位置  <br /></td></tr>
+<tr class="separator:a17caa6f28f0fbd3c7bf35756e0920af4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd227cefe18539d93a2f8379d9aaf55c" id="r_acd227cefe18539d93a2f8379d9aaf55c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd227cefe18539d93a2f8379d9aaf55c">get_window_size</a> (int *rows, int *cols)</td></tr>
+<tr class="memdesc:acd227cefe18539d93a2f8379d9aaf55c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取窗口大小  <br /></td></tr>
+<tr class="separator:acd227cefe18539d93a2f8379d9aaf55c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd2ade8d4e20fc9e78850fa3ccd61ef3" id="r_afd2ade8d4e20fc9e78850fa3ccd61ef3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afd2ade8d4e20fc9e78850fa3ccd61ef3">is_separator</a> (int c)</td></tr>
+<tr class="memdesc:afd2ade8d4e20fc9e78850fa3ccd61ef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否为分隔符  <br /></td></tr>
+<tr class="separator:afd2ade8d4e20fc9e78850fa3ccd61ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac93a7021a77e431e10ae765100e56e21" id="r_ac93a7021a77e431e10ae765100e56e21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac93a7021a77e431e10ae765100e56e21">editor_update_syntax</a> (<a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a> *row)</td></tr>
+<tr class="memdesc:ac93a7021a77e431e10ae765100e56e21"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器更新语法高亮  <br /></td></tr>
+<tr class="separator:ac93a7021a77e431e10ae765100e56e21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a214ba3337bb6709222478812cce17ca7" id="r_a214ba3337bb6709222478812cce17ca7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a214ba3337bb6709222478812cce17ca7">editor_syn2col</a> (int hl)</td></tr>
+<tr class="memdesc:a214ba3337bb6709222478812cce17ca7"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器语法转颜色  <br /></td></tr>
+<tr class="separator:a214ba3337bb6709222478812cce17ca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a045f08c2794bd61e1d463269ca50ad01" id="r_a045f08c2794bd61e1d463269ca50ad01"><td class="memItemLeft" align="right" valign="top"><a id="a045f08c2794bd61e1d463269ca50ad01" name="a045f08c2794bd61e1d463269ca50ad01"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>editor_select_syntax_highlight</b> ()</td></tr>
+<tr class="memdesc:a045f08c2794bd61e1d463269ca50ad01"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器匹配文件名的语法高亮 <br /></td></tr>
+<tr class="separator:a045f08c2794bd61e1d463269ca50ad01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52f878cab5b3c42e42d05bd0cf92b722" id="r_a52f878cab5b3c42e42d05bd0cf92b722"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a52f878cab5b3c42e42d05bd0cf92b722">editor_row_cx2rx</a> (<a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a> *row, int cx)</td></tr>
+<tr class="memdesc:a52f878cab5b3c42e42d05bd0cf92b722"><td class="mdescLeft">&#160;</td><td class="mdescRight">将字符索引转换为渲染索引  <br /></td></tr>
+<tr class="separator:a52f878cab5b3c42e42d05bd0cf92b722"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0003ea1221a22fee2cb0e580f98d76f1" id="r_a0003ea1221a22fee2cb0e580f98d76f1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0003ea1221a22fee2cb0e580f98d76f1">editor_row_rx2cx</a> (<a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a> *row, int rx)</td></tr>
+<tr class="memdesc:a0003ea1221a22fee2cb0e580f98d76f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">将渲染索引转换为字符索引  <br /></td></tr>
+<tr class="separator:a0003ea1221a22fee2cb0e580f98d76f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e385088ea297f52dc01abb5673c03b9" id="r_a8e385088ea297f52dc01abb5673c03b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e385088ea297f52dc01abb5673c03b9">editor_update_row</a> (<a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a> *row)</td></tr>
+<tr class="memdesc:a8e385088ea297f52dc01abb5673c03b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器（更新）渲染行  <br /></td></tr>
+<tr class="separator:a8e385088ea297f52dc01abb5673c03b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6101d0a5a3aa90a84d636140bfe37ab" id="r_ab6101d0a5a3aa90a84d636140bfe37ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6101d0a5a3aa90a84d636140bfe37ab">editor_insert_row</a> (int at, char *s, size_t len)</td></tr>
+<tr class="memdesc:ab6101d0a5a3aa90a84d636140bfe37ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器加入行  <br /></td></tr>
+<tr class="separator:ab6101d0a5a3aa90a84d636140bfe37ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd021275ad814d33aff7ecf9d6212244" id="r_afd021275ad814d33aff7ecf9d6212244"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afd021275ad814d33aff7ecf9d6212244">editor_free_row</a> (<a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a> *row)</td></tr>
+<tr class="memdesc:afd021275ad814d33aff7ecf9d6212244"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器释放行  <br /></td></tr>
+<tr class="separator:afd021275ad814d33aff7ecf9d6212244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaff245aacc8bd17e4362ed8e488968ae" id="r_aaff245aacc8bd17e4362ed8e488968ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaff245aacc8bd17e4362ed8e488968ae">editor_del_row</a> (int at)</td></tr>
+<tr class="memdesc:aaff245aacc8bd17e4362ed8e488968ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器删除行  <br /></td></tr>
+<tr class="separator:aaff245aacc8bd17e4362ed8e488968ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cebbd01ba082e916455f53c78a5b918" id="r_a2cebbd01ba082e916455f53c78a5b918"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2cebbd01ba082e916455f53c78a5b918">editor_row_insert_char</a> (<a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a> *row, int at, int c)</td></tr>
+<tr class="memdesc:a2cebbd01ba082e916455f53c78a5b918"><td class="mdescLeft">&#160;</td><td class="mdescRight">在给定位置插入单个字符到<code>erow</code>  <br /></td></tr>
+<tr class="separator:a2cebbd01ba082e916455f53c78a5b918"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3742c3bd487dcb176f08ed147e2029b0" id="r_a3742c3bd487dcb176f08ed147e2029b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3742c3bd487dcb176f08ed147e2029b0">editor_row_append_str</a> (<a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a> *row, char *s, size_t len)</td></tr>
+<tr class="memdesc:a3742c3bd487dcb176f08ed147e2029b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器行加入字符串  <br /></td></tr>
+<tr class="separator:a3742c3bd487dcb176f08ed147e2029b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa643392f956bfc06ebdd495cf4712d0" id="r_aaa643392f956bfc06ebdd495cf4712d0"><td class="memItemLeft" align="right" valign="top"><a id="aaa643392f956bfc06ebdd495cf4712d0" name="aaa643392f956bfc06ebdd495cf4712d0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>editor_row_del_char</b> (<a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a> *row, int at)</td></tr>
+<tr class="separator:aaa643392f956bfc06ebdd495cf4712d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fb39e9062388536f21833ee8ed8e078" id="r_a8fb39e9062388536f21833ee8ed8e078"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8fb39e9062388536f21833ee8ed8e078">editor_insert_char</a> (int c)</td></tr>
+<tr class="memdesc:a8fb39e9062388536f21833ee8ed8e078"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器插入字符  <br /></td></tr>
+<tr class="separator:a8fb39e9062388536f21833ee8ed8e078"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7e9d26746afb2bcc7d657b2694ccfff" id="r_af7e9d26746afb2bcc7d657b2694ccfff"><td class="memItemLeft" align="right" valign="top"><a id="af7e9d26746afb2bcc7d657b2694ccfff" name="af7e9d26746afb2bcc7d657b2694ccfff"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>editor_insert_newline</b> ()</td></tr>
+<tr class="memdesc:af7e9d26746afb2bcc7d657b2694ccfff"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器插入新行 <br /></td></tr>
+<tr class="separator:af7e9d26746afb2bcc7d657b2694ccfff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af409d75c63a51bbfd4480816a042b3aa" id="r_af409d75c63a51bbfd4480816a042b3aa"><td class="memItemLeft" align="right" valign="top"><a id="af409d75c63a51bbfd4480816a042b3aa" name="af409d75c63a51bbfd4480816a042b3aa"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>editor_del_char</b> ()</td></tr>
+<tr class="memdesc:af409d75c63a51bbfd4480816a042b3aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器删除字符 <br /></td></tr>
+<tr class="separator:af409d75c63a51bbfd4480816a042b3aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f7c55082bdb76feb6e144f89114280d" id="r_a6f7c55082bdb76feb6e144f89114280d"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6f7c55082bdb76feb6e144f89114280d">editor_rows2str</a> (int *str_len)</td></tr>
+<tr class="memdesc:a6f7c55082bdb76feb6e144f89114280d"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器行转化为字符串  <br /></td></tr>
+<tr class="separator:a6f7c55082bdb76feb6e144f89114280d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a549d6f4701e7912ed77bbf9c7d51d5a4" id="r_a549d6f4701e7912ed77bbf9c7d51d5a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a549d6f4701e7912ed77bbf9c7d51d5a4">editor_open</a> (char *filename)</td></tr>
+<tr class="memdesc:a549d6f4701e7912ed77bbf9c7d51d5a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器打开文件  <br /></td></tr>
+<tr class="separator:a549d6f4701e7912ed77bbf9c7d51d5a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a605f100726e515f1a255cca5222955" id="r_a0a605f100726e515f1a255cca5222955"><td class="memItemLeft" align="right" valign="top"><a id="a0a605f100726e515f1a255cca5222955" name="a0a605f100726e515f1a255cca5222955"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>editor_save</b> ()</td></tr>
+<tr class="memdesc:a0a605f100726e515f1a255cca5222955"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器保存 <br /></td></tr>
+<tr class="separator:a0a605f100726e515f1a255cca5222955"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d9125f91b6c4a0153b85c64bb6cc245" id="r_a1d9125f91b6c4a0153b85c64bb6cc245"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d9125f91b6c4a0153b85c64bb6cc245">editor_find_callback</a> (char *query, int key)</td></tr>
+<tr class="memdesc:a1d9125f91b6c4a0153b85c64bb6cc245"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器查找回调函数  <br /></td></tr>
+<tr class="separator:a1d9125f91b6c4a0153b85c64bb6cc245"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5748e0230bb318a5f878314c67437d55" id="r_a5748e0230bb318a5f878314c67437d55"><td class="memItemLeft" align="right" valign="top"><a id="a5748e0230bb318a5f878314c67437d55" name="a5748e0230bb318a5f878314c67437d55"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>editor_find</b> ()</td></tr>
+<tr class="memdesc:a5748e0230bb318a5f878314c67437d55"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器寻找字符串 <br /></td></tr>
+<tr class="separator:a5748e0230bb318a5f878314c67437d55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a093ea6b1c1a7a57bd5ed8d5660564ae7" id="r_a093ea6b1c1a7a57bd5ed8d5660564ae7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a093ea6b1c1a7a57bd5ed8d5660564ae7">editor_scroll</a> ()</td></tr>
+<tr class="memdesc:a093ea6b1c1a7a57bd5ed8d5660564ae7"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器滚动  <br /></td></tr>
+<tr class="separator:a093ea6b1c1a7a57bd5ed8d5660564ae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f6ab2a62fa10c6ba766b3b8ab9eb27b" id="r_a3f6ab2a62fa10c6ba766b3b8ab9eb27b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f6ab2a62fa10c6ba766b3b8ab9eb27b">editor_draw_rows</a> (<a class="el" href="#a625087503a734e044bf9d7a087e8826e">abuf_t</a> *ab)</td></tr>
+<tr class="memdesc:a3f6ab2a62fa10c6ba766b3b8ab9eb27b"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器绘制行  <br /></td></tr>
+<tr class="separator:a3f6ab2a62fa10c6ba766b3b8ab9eb27b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8825837d22fb447b5dfb2746ae554c4" id="r_af8825837d22fb447b5dfb2746ae554c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af8825837d22fb447b5dfb2746ae554c4">editor_draw_status_bar</a> (<a class="el" href="#a625087503a734e044bf9d7a087e8826e">abuf_t</a> *ab)</td></tr>
+<tr class="memdesc:af8825837d22fb447b5dfb2746ae554c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器绘制状态栏  <br /></td></tr>
+<tr class="separator:af8825837d22fb447b5dfb2746ae554c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae050bf5ab3789cbe707b0ff52a70351d" id="r_ae050bf5ab3789cbe707b0ff52a70351d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae050bf5ab3789cbe707b0ff52a70351d">editor_draw_status_msg</a> (<a class="el" href="#a625087503a734e044bf9d7a087e8826e">abuf_t</a> *ab)</td></tr>
+<tr class="memdesc:ae050bf5ab3789cbe707b0ff52a70351d"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器绘制状态栏消息  <br /></td></tr>
+<tr class="separator:ae050bf5ab3789cbe707b0ff52a70351d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2348d0cdb4ff58691871d78b8140bbb" id="r_ae2348d0cdb4ff58691871d78b8140bbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae2348d0cdb4ff58691871d78b8140bbb">editor_move_cursor</a> (int key)</td></tr>
+<tr class="memdesc:ae2348d0cdb4ff58691871d78b8140bbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器移动光标位置  <br /></td></tr>
+<tr class="separator:ae2348d0cdb4ff58691871d78b8140bbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ea6b91254bc1b912cdf085bea1c9f68" id="r_a5ea6b91254bc1b912cdf085bea1c9f68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ea6b91254bc1b912cdf085bea1c9f68">editor_proc_key</a> ()</td></tr>
+<tr class="memdesc:a5ea6b91254bc1b912cdf085bea1c9f68"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器处理键入  <br /></td></tr>
+<tr class="separator:a5ea6b91254bc1b912cdf085bea1c9f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a2630f404abd0bb49b4a34591a91144" id="r_a5a2630f404abd0bb49b4a34591a91144"><td class="memItemLeft" align="right" valign="top"><a id="a5a2630f404abd0bb49b4a34591a91144" name="a5a2630f404abd0bb49b4a34591a91144"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>editor_init</b> ()</td></tr>
+<tr class="memdesc:a5a2630f404abd0bb49b4a34591a91144"><td class="mdescLeft">&#160;</td><td class="mdescRight">编辑器初始化 <br /></td></tr>
+<tr class="separator:a5a2630f404abd0bb49b4a34591a91144"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97" id="r_a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top"><a id="a0ddf1224851353fc92bfbff6f499fa97" name="a0ddf1224851353fc92bfbff6f499fa97"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> (int argc, char *argv[])</td></tr>
+<tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:aef5b2ca383b2d34d19d448e632bb4f1e" id="r_aef5b2ca383b2d34d19d448e632bb4f1e"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef5b2ca383b2d34d19d448e632bb4f1e">C_HL_EXT</a> [] = {&quot;.c&quot;, &quot;.h&quot;, &quot;.cpp&quot;, NULL}</td></tr>
+<tr class="separator:aef5b2ca383b2d34d19d448e632bb4f1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e9fdd221dff5eced4ccf43705fe9414" id="r_a3e9fdd221dff5eced4ccf43705fe9414"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e9fdd221dff5eced4ccf43705fe9414">C_HL_KEY</a> []</td></tr>
+<tr class="separator:a3e9fdd221dff5eced4ccf43705fe9414"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab528a290dca979d323e7f394addcda06" id="r_ab528a290dca979d323e7f394addcda06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a4b331922880c1076c8a24808e021a1d8">esyn_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab528a290dca979d323e7f394addcda06">HLDB</a> []</td></tr>
+<tr class="separator:ab528a290dca979d323e7f394addcda06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a272c9a68e121649f71da628cb8f08333" id="r_a272c9a68e121649f71da628cb8f08333"><td class="memItemLeft" align="right" valign="top"><a id="a272c9a68e121649f71da628cb8f08333" name="a272c9a68e121649f71da628cb8f08333"></a>
+<a class="el" href="#a9c9bd350cced73f0e92cafebcb8bf1ec">editor_config_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ec</b></td></tr>
+<tr class="separator:a272c9a68e121649f71da628cb8f08333"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>主程序入口 </p>
+<dl class="section author"><dt>作者</dt><dd>lancer (<a href="#" onclick="location.href='mai'+'lto:'+'lan'+'ce'+'rst'+'ad'+'ium'+'@1'+'63.'+'co'+'m'; return false;">lance<span class="obfuscator">.nosp@m.</span>rsta<span class="obfuscator">.nosp@m.</span>dium@<span class="obfuscator">.nosp@m.</span>163.<span class="obfuscator">.nosp@m.</span>com</a>) </dd></dl>
+<dl class="section version"><dt>版本</dt><dd>0.1 </dd></dl>
+<dl class="section date"><dt>日期</dt><dd>2024-01-05 </dd></dl>
+<dl class="section copyright"><dt>版权所有</dt><dd>Copyright (c) 2024 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>参考项目：<a href="https://viewsourcecode.org/snaptoken/kilo">文本编辑器 | kilo</a> </dd></dl>
+</div><h2 class="groupheader">宏定义说明</h2>
+<a id="a338375e0d9379e2c297acac89c4049e7" name="a338375e0d9379e2c297acac89c4049e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a338375e0d9379e2c297acac89c4049e7">&#9670;&#160;</a></span>ABUF_INIT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ABUF_INIT&#160;&#160;&#160;{NULL, 0}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>追加缓冲区初始化 </p>
+
+</div>
+</div>
+<a id="a6ad38d024c3548be5f50d7fc0679664a" name="a6ad38d024c3548be5f50d7fc0679664a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ad38d024c3548be5f50d7fc0679664a">&#9670;&#160;</a></span>CTRL_KEY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CTRL_KEY</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">k</span></td><td>)</td>
+          <td>&#160;&#160;&#160;((k) &amp; 0x1f)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>切换宏<code>CRTL+k</code>：按位对二进制值<code>00011111</code>进行<code>AND</code>。 </p>
+
+</div>
+</div>
+<a id="ac72d068a4180c7a8e9ea0feebc0013ef" name="ac72d068a4180c7a8e9ea0feebc0013ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac72d068a4180c7a8e9ea0feebc0013ef">&#9670;&#160;</a></span>HLDB_ENTRIES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HLDB_ENTRIES&#160;&#160;&#160;(sizeof(<a class="el" href="#ab528a290dca979d323e7f394addcda06">HLDB</a>) / sizeof(<a class="el" href="#ab528a290dca979d323e7f394addcda06">HLDB</a>[0]))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>语法突出数据库大小 </p>
+
+</div>
+</div>
+<a id="a03d3f54c622fea475aef39f7195ec842" name="a03d3f54c622fea475aef39f7195ec842"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03d3f54c622fea475aef39f7195ec842">&#9670;&#160;</a></span>QUIT_TIMES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QUIT_TIMES&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>如果设置了<code>ec.dirty</code>，将在状态栏中显示警告：要求用户再按<code>Ctrl-Q</code>两次才能退出而不保存 </p>
+
+</div>
+</div>
+<a id="acc269b479b18fbda6ce99bd682d2280e" name="acc269b479b18fbda6ce99bd682d2280e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc269b479b18fbda6ce99bd682d2280e">&#9670;&#160;</a></span>TAB_STOP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TAB_STOP&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>制表位的长度常量 </p>
+
+</div>
+</div>
+<a id="ab00b3e840654ae945c059938b17b375f" name="ab00b3e840654ae945c059938b17b375f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab00b3e840654ae945c059938b17b375f">&#9670;&#160;</a></span>TEXC_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TEXC_VERSION&#160;&#160;&#160;&quot;0.0.1&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><code>texc</code>版本 </p>
+
+</div>
+</div>
+<h2 class="groupheader">类型定义说明</h2>
+<a id="a625087503a734e044bf9d7a087e8826e" name="a625087503a734e044bf9d7a087e8826e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a625087503a734e044bf9d7a087e8826e">&#9670;&#160;</a></span>abuf_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structabuf.html">abuf</a> <a class="el" href="#a625087503a734e044bf9d7a087e8826e">abuf_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>追加缓冲区结构体 </p>
+<p>全局编辑器配置实例 </p>
+
+</div>
+</div>
+<a id="a3286f23de1bf8554398edc8987b6d587" name="a3286f23de1bf8554398edc8987b6d587"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3286f23de1bf8554398edc8987b6d587">&#9670;&#160;</a></span>erow_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structerow.html">erow</a> <a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器行 </p>
+<dl class="section note"><dt>注解</dt><dd>将一行文本存储为指向动态分配的字符数据的指针和其长度 </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">枚举类型说明</h2>
+<a id="ae8516053d564d4f1040e8f69d2f5e1a8" name="ae8516053d564d4f1040e8f69d2f5e1a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8516053d564d4f1040e8f69d2f5e1a8">&#9670;&#160;</a></span>editor_key</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#ae8516053d564d4f1040e8f69d2f5e1a8">editor_key</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器控制键入配置 </p>
+<dl class="section note"><dt>注解</dt><dd>按键冲突处理 现在我们只需在<code>editor_key</code>枚举中选择 与<code>wasd</code>不冲突的箭头键表示形式即可。 我们将为它们提供一个超出字符范围的大整数值， 以便它们不会与任何普通按键冲突。 </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">函数说明</h2>
+<a id="a902759df5a103aee802ea2e2af83ecfe" name="a902759df5a103aee802ea2e2af83ecfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a902759df5a103aee802ea2e2af83ecfe">&#9670;&#160;</a></span>abuf_append()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void abuf_append </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a625087503a734e044bf9d7a087e8826e">abuf_t</a> *</td>          <td class="paramname"><span class="paramname"><em>ab</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>s</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>缓冲区追加字符串 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ab</td><td>追加缓冲区 </td></tr>
+    <tr><td class="paramname">s</td><td>字符串 </td></tr>
+    <tr><td class="paramname">len</td><td>字符串长度 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2f3dd675042479bb08c01fac07ba5887" name="a2f3dd675042479bb08c01fac07ba5887"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f3dd675042479bb08c01fac07ba5887">&#9670;&#160;</a></span>abuf_free()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void abuf_free </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a625087503a734e044bf9d7a087e8826e">abuf_t</a> *</td>          <td class="paramname"><span class="paramname"><em>ab</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>释放追加缓冲区 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ab</td><td>追加缓冲区 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aaff245aacc8bd17e4362ed8e488968ae" name="aaff245aacc8bd17e4362ed8e488968ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaff245aacc8bd17e4362ed8e488968ae">&#9670;&#160;</a></span>editor_del_row()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_del_row </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>at</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器删除行 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">at</td><td>行号 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3f6ab2a62fa10c6ba766b3b8ab9eb27b" name="a3f6ab2a62fa10c6ba766b3b8ab9eb27b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f6ab2a62fa10c6ba766b3b8ab9eb27b">&#9670;&#160;</a></span>editor_draw_rows()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_draw_rows </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a625087503a734e044bf9d7a087e8826e">abuf_t</a> *</td>          <td class="paramname"><span class="paramname"><em>ab</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器绘制行 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ab</td><td>追加缓冲区 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>类似<code>vim</code>左侧的波浪。<ul>
+<li>我们打印最后一个波形符时， 会像在任何其他行上一样打印“\r<br  />
+”， 但这会导致终端滚动以便为新的空白行腾出空间。 故打印“\r<br  />
+”时，需要让最后一行成为例外。 </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a id="af8825837d22fb447b5dfb2746ae554c4" name="af8825837d22fb447b5dfb2746ae554c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8825837d22fb447b5dfb2746ae554c4">&#9670;&#160;</a></span>editor_draw_status_bar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_draw_status_bar </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a625087503a734e044bf9d7a087e8826e">abuf_t</a> *</td>          <td class="paramname"><span class="paramname"><em>ab</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器绘制状态栏 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ab</td><td>追加缓冲区 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae050bf5ab3789cbe707b0ff52a70351d" name="ae050bf5ab3789cbe707b0ff52a70351d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae050bf5ab3789cbe707b0ff52a70351d">&#9670;&#160;</a></span>editor_draw_status_msg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_draw_status_msg </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a625087503a734e044bf9d7a087e8826e">abuf_t</a> *</td>          <td class="paramname"><span class="paramname"><em>ab</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器绘制状态栏消息 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ab</td><td>追加缓冲区 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1d9125f91b6c4a0153b85c64bb6cc245" name="a1d9125f91b6c4a0153b85c64bb6cc245"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d9125f91b6c4a0153b85c64bb6cc245">&#9670;&#160;</a></span>editor_find_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_find_callback </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>query</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>key</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器查找回调函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">query</td><td>查询字符串 </td></tr>
+    <tr><td class="paramname">key</td><td>键入 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="afd021275ad814d33aff7ecf9d6212244" name="afd021275ad814d33aff7ecf9d6212244"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd021275ad814d33aff7ecf9d6212244">&#9670;&#160;</a></span>editor_free_row()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_free_row </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a> *</td>          <td class="paramname"><span class="paramname"><em>row</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器释放行 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row</td><td>编辑器行 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8fb39e9062388536f21833ee8ed8e078" name="a8fb39e9062388536f21833ee8ed8e078"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fb39e9062388536f21833ee8ed8e078">&#9670;&#160;</a></span>editor_insert_char()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_insert_char </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>c</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器插入字符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>字符 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab6101d0a5a3aa90a84d636140bfe37ab" name="ab6101d0a5a3aa90a84d636140bfe37ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6101d0a5a3aa90a84d636140bfe37ab">&#9670;&#160;</a></span>editor_insert_row()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_insert_row </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>at</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器加入行 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">at</td><td>行号 </td></tr>
+    <tr><td class="paramname">s</td><td>行字符串 </td></tr>
+    <tr><td class="paramname">len</td><td>行长度 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae2348d0cdb4ff58691871d78b8140bbb" name="ae2348d0cdb4ff58691871d78b8140bbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2348d0cdb4ff58691871d78b8140bbb">&#9670;&#160;</a></span>editor_move_cursor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_move_cursor </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器移动光标位置 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键入字符 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a549d6f4701e7912ed77bbf9c7d51d5a4" name="a549d6f4701e7912ed77bbf9c7d51d5a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a549d6f4701e7912ed77bbf9c7d51d5a4">&#9670;&#160;</a></span>editor_open()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_open </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>filename</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器打开文件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>文件名 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5ea6b91254bc1b912cdf085bea1c9f68" name="a5ea6b91254bc1b912cdf085bea1c9f68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ea6b91254bc1b912cdf085bea1c9f68">&#9670;&#160;</a></span>editor_proc_key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_proc_key </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器处理键入 </p>
+<p>TODO: 处理特殊字符</p>
+
+</div>
+</div>
+<a id="ab8ec1c7e504dbf78cf565f0cd66cbafd" name="ab8ec1c7e504dbf78cf565f0cd66cbafd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8ec1c7e504dbf78cf565f0cd66cbafd">&#9670;&#160;</a></span>editor_prompt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * editor_prompt </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>prompt</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(char *, int)</td>          <td class="paramname"><span class="paramname"><em>callback</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器显示提示，提供文本输入 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">prompt</td><td>提示信息 </td></tr>
+    <tr><td class="paramname">callback</td><td>回调函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>char* 输入信息 </dd></dl>
+
+</div>
+</div>
+<a id="af89f5cc3c97a546a3b0f01c1d84ef78c" name="af89f5cc3c97a546a3b0f01c1d84ef78c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af89f5cc3c97a546a3b0f01c1d84ef78c">&#9670;&#160;</a></span>editor_read_key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_read_key </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器读取键入 </p>
+<dl class="section return"><dt>返回</dt><dd>char 键入字符 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>Arrow 转义字符处理<ul>
+<li>如果我们读取一个转义字符，会立即将另外两个字节读入<code>seq</code>缓冲区。 如果其中任何一个读数超时（0.1 秒后）， 则假设用户只是按下了 Escape 键并返回该键。 否则，会查看转义序列是否为箭头键转义序列。 </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a id="a3742c3bd487dcb176f08ed147e2029b0" name="a3742c3bd487dcb176f08ed147e2029b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3742c3bd487dcb176f08ed147e2029b0">&#9670;&#160;</a></span>editor_row_append_str()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_row_append_str </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a> *</td>          <td class="paramname"><span class="paramname"><em>row</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器行加入字符串 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row</td><td>编辑器行 </td></tr>
+    <tr><td class="paramname">s</td><td>字符串 </td></tr>
+    <tr><td class="paramname">len</td><td>字符串长度 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>用于实现删除功能 </dd></dl>
+
+</div>
+</div>
+<a id="a52f878cab5b3c42e42d05bd0cf92b722" name="a52f878cab5b3c42e42d05bd0cf92b722"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52f878cab5b3c42e42d05bd0cf92b722">&#9670;&#160;</a></span>editor_row_cx2rx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_row_cx2rx </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a> *</td>          <td class="paramname"><span class="paramname"><em>row</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cx</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>将字符索引转换为渲染索引 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row</td><td>编辑器行 </td></tr>
+    <tr><td class="paramname">cx</td><td>字符索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>int 渲染索引 </dd></dl>
+
+</div>
+</div>
+<a id="a2cebbd01ba082e916455f53c78a5b918" name="a2cebbd01ba082e916455f53c78a5b918"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cebbd01ba082e916455f53c78a5b918">&#9670;&#160;</a></span>editor_row_insert_char()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_row_insert_char </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a> *</td>          <td class="paramname"><span class="paramname"><em>row</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>at</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>c</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>在给定位置插入单个字符到<code>erow</code> </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row</td><td>编辑器行 </td></tr>
+    <tr><td class="paramname">at</td><td>字符索引 </td></tr>
+    <tr><td class="paramname">c</td><td>字符 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0003ea1221a22fee2cb0e580f98d76f1" name="a0003ea1221a22fee2cb0e580f98d76f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0003ea1221a22fee2cb0e580f98d76f1">&#9670;&#160;</a></span>editor_row_rx2cx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_row_rx2cx </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a> *</td>          <td class="paramname"><span class="paramname"><em>row</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>rx</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>将渲染索引转换为字符索引 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row</td><td>编辑器行 </td></tr>
+    <tr><td class="paramname">rx</td><td>渲染索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>int 字符索引 </dd></dl>
+
+</div>
+</div>
+<a id="a6f7c55082bdb76feb6e144f89114280d" name="a6f7c55082bdb76feb6e144f89114280d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f7c55082bdb76feb6e144f89114280d">&#9670;&#160;</a></span>editor_rows2str()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * editor_rows2str </td>
+          <td>(</td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>str_len</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器行转化为字符串 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str_len</td><td>获取字符串长度 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>char* 字符串指针 </dd></dl>
+
+</div>
+</div>
+<a id="a093ea6b1c1a7a57bd5ed8d5660564ae7" name="a093ea6b1c1a7a57bd5ed8d5660564ae7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a093ea6b1c1a7a57bd5ed8d5660564ae7">&#9670;&#160;</a></span>editor_scroll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_scroll </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器滚动 </p>
+<dl class="section note"><dt>注解</dt><dd>设置<code>ec.rowoff</code>值： 策略是检查光标是否已移出可见窗口， 如果是，则调整<code>ec.rowoff</code>， 使光标刚好位于可见窗口内。 </dd></dl>
+
+</div>
+</div>
+<a id="a902068fc1db96a09b049e0eef1ef09d4" name="a902068fc1db96a09b049e0eef1ef09d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a902068fc1db96a09b049e0eef1ef09d4">&#9670;&#160;</a></span>editor_set_status_msg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_set_status_msg </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>fmt</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>...</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器设置状态栏消息 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fmt</td><td>消息格式化字符串 </td></tr>
+    <tr><td class="paramname">...</td><td>其他参数</td></tr>
+    <tr><td class="paramname">fmt</td><td>消息格式化字符串 </td></tr>
+    <tr><td class="paramname">...</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a214ba3337bb6709222478812cce17ca7" name="a214ba3337bb6709222478812cce17ca7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a214ba3337bb6709222478812cce17ca7">&#9670;&#160;</a></span>editor_syn2col()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_syn2col </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>hl</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器语法转颜色 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hl</td><td>语法枚举，参考<code>dfitor_highlight</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>int 颜色 </dd></dl>
+
+</div>
+</div>
+<a id="a8e385088ea297f52dc01abb5673c03b9" name="a8e385088ea297f52dc01abb5673c03b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e385088ea297f52dc01abb5673c03b9">&#9670;&#160;</a></span>editor_update_row()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_update_row </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a> *</td>          <td class="paramname"><span class="paramname"><em>row</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器（更新）渲染行 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row</td><td>编辑器行 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac93a7021a77e431e10ae765100e56e21" name="ac93a7021a77e431e10ae765100e56e21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac93a7021a77e431e10ae765100e56e21">&#9670;&#160;</a></span>editor_update_syntax()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void editor_update_syntax </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a3286f23de1bf8554398edc8987b6d587">erow_t</a> *</td>          <td class="paramname"><span class="paramname"><em>row</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>编辑器更新语法高亮 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row</td><td>编辑器行 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a387166a0b91006891f6f339e47a07191" name="a387166a0b91006891f6f339e47a07191"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a387166a0b91006891f6f339e47a07191">&#9670;&#160;</a></span>enable_raw_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void enable_raw_mode </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开启原始文本模式 </p>
+<dl class="section note"><dt>注解</dt><dd>原始文本模式 需要关闭相关功能并获取等待延迟</dd></dl>
+<h2><a class="anchor" id="autotoc_md0"></a>
+关闭特定功能</h2>
+<ol type="1">
+<li><code>ECHO</code>功能会将键入打印到终端。 在原始模式下渲染编辑器UI时， 会妨碍我们输入。</li>
+</ol>
+<ul>
+<li>例如，使用<code>sudo</code>在终端上输入密码： <div class="fragment"><div class="line">sudo apt install xxx</div>
+</div><!-- fragment --></li>
+</ul>
+<ol type="1">
+<li><code>ICANON</code>功能会逐个字节监测键入， 而不是逐行读取， 不需要按下<code>Enter</code>键。</li>
+<li><code>ISIG</code>功能会控制如下信号： 默认情况下，<code>Ctrl-C</code>向当前进程发送<code>SIGINT</code>信号， 导致其终止；<code>Ctrl-Z</code>向当前进程发送<code>SIGTSTP</code>信号， 导致其挂起。</li>
+<li><code>IXON</code>功能会控制如下软件流信号： 默认情况下，<code>Ctrl-S</code>停止将数据传输到终端， 直到按<code>Ctrl-Q</code>。</li>
+<li><code>IEXTEN</code>功能会控制如下信号： 键入<code>Ctrl-V</code>时，终端会等待你键入其他字符， 然后发送该字符。关闭<code>IEXTEN</code>还可以修复 macOS<code>Ctrl-O</code>中的问题。</li>
+<li><code>ICRNL</code>功能控制的<code>Ctrl-M</code>很奇怪： 当我们期望它被读取为<code>13</code>时，它被读取为<code>10</code> 终端有助于将用户输入的任何回车符<code>（13，\r）</code> 转换为换行符<code>（10，\n）</code>，关闭这个功能。</li>
+<li><code>OPOST</code>标志控制所有输出处理功能： 在 printf() 语句中添加回车符， 防止光标只向下移动，而不向屏幕的左侧移动。</li>
+<li>其他标志：略</li>
+</ol>
+<h2><a class="anchor" id="autotoc_md1"></a>
+超时读取</h2>
+<ol type="1">
+<li><code>VMIN</code>值设置<code>read()</code>返回之前所需输入的最小字节数。 我们将其设置为<code>0</code>，以便<code>read()</code>在有任何输入要读取时立即返回。</li>
+<li><code>VTIME</code>值设置<code>read()</code>返回之前等待的最长时间。 它以十分之一秒为单位，因此我们将其设置为<code>1/10</code>秒，即<code>100</code>毫秒。 如果<code>read()</code>超时，它将返回<code>0</code>。这是有道理的， 因为它通常的返回值是读取的字节数。 </li>
+</ol>
+
+</div>
+</div>
+<a id="a465bed984e3f89d3fbd759706aa9b03f" name="a465bed984e3f89d3fbd759706aa9b03f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a465bed984e3f89d3fbd759706aa9b03f">&#9670;&#160;</a></span>fatal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fatal </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>错误处理：打印错误信息 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>错误信息 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a17caa6f28f0fbd3c7bf35756e0920af4" name="a17caa6f28f0fbd3c7bf35756e0920af4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17caa6f28f0fbd3c7bf35756e0920af4">&#9670;&#160;</a></span>get_cursor_position()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_cursor_position </td>
+          <td>(</td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>rows</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>cols</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取光标位置 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rows</td><td>行数 </td></tr>
+    <tr><td class="paramname">cols</td><td>列数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>int 返回值 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-1</td><td>获取失败 </td></tr>
+    <tr><td class="paramname">0</td><td>获取成功 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="acd227cefe18539d93a2f8379d9aaf55c" name="acd227cefe18539d93a2f8379d9aaf55c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd227cefe18539d93a2f8379d9aaf55c">&#9670;&#160;</a></span>get_window_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_window_size </td>
+          <td>(</td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>rows</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>cols</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取窗口大小 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rows</td><td>行数 </td></tr>
+    <tr><td class="paramname">cols</td><td>列数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>int 返回值 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-1</td><td>获取失败 </td></tr>
+    <tr><td class="paramname">0</td><td>获取成功 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>自定义获取窗口大小<ul>
+<li><code>ioctl()</code>不能保证能够在所有系统上请求窗口大小， 我们将提供获取窗口大小的方法。</li>
+<li>策略是将光标定位在屏幕的右下角， 然后使用转义序列来查询光标的位置。 这告诉我们屏幕上必须有多少行和列。 </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a id="afd2ade8d4e20fc9e78850fa3ccd61ef3" name="afd2ade8d4e20fc9e78850fa3ccd61ef3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd2ade8d4e20fc9e78850fa3ccd61ef3">&#9670;&#160;</a></span>is_separator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int is_separator </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>c</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>是否为分隔符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>字符 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">变量说明</h2>
+<a id="aef5b2ca383b2d34d19d448e632bb4f1e" name="aef5b2ca383b2d34d19d448e632bb4f1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef5b2ca383b2d34d19d448e632bb4f1e">&#9670;&#160;</a></span>C_HL_EXT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* C_HL_EXT[] = {&quot;.c&quot;, &quot;.h&quot;, &quot;.cpp&quot;, NULL}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>C拓展文件后缀 </p>
+
+</div>
+</div>
+<a id="a3e9fdd221dff5eced4ccf43705fe9414" name="a3e9fdd221dff5eced4ccf43705fe9414"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e9fdd221dff5eced4ccf43705fe9414">&#9670;&#160;</a></span>C_HL_KEY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* C_HL_KEY[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>初始值:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    <span class="stringliteral">&quot;switch&quot;</span>, <span class="stringliteral">&quot;if&quot;</span>, <span class="stringliteral">&quot;while&quot;</span>, <span class="stringliteral">&quot;for&quot;</span>, <span class="stringliteral">&quot;break&quot;</span>, <span class="stringliteral">&quot;continue&quot;</span>, <span class="stringliteral">&quot;return&quot;</span>, <span class="stringliteral">&quot;else&quot;</span>,</div>
+<div class="line">    <span class="stringliteral">&quot;struct&quot;</span>, <span class="stringliteral">&quot;union&quot;</span>, <span class="stringliteral">&quot;typedef&quot;</span>, <span class="stringliteral">&quot;static&quot;</span>, <span class="stringliteral">&quot;enum&quot;</span>, <span class="stringliteral">&quot;class&quot;</span>, <span class="stringliteral">&quot;case&quot;</span>,</div>
+<div class="line">    <span class="stringliteral">&quot;int|&quot;</span>, <span class="stringliteral">&quot;long|&quot;</span>, <span class="stringliteral">&quot;double|&quot;</span>, <span class="stringliteral">&quot;float|&quot;</span>, <span class="stringliteral">&quot;char|&quot;</span>, <span class="stringliteral">&quot;unsigned|&quot;</span>, <span class="stringliteral">&quot;signed|&quot;</span>,</div>
+<div class="line">    <span class="stringliteral">&quot;void|&quot;</span>, NULL</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>C拓展文件关键词 </p>
+
+</div>
+</div>
+<a id="ab528a290dca979d323e7f394addcda06" name="ab528a290dca979d323e7f394addcda06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab528a290dca979d323e7f394addcda06">&#9670;&#160;</a></span>HLDB</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a4b331922880c1076c8a24808e021a1d8">esyn_t</a> HLDB[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>初始值:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    {</div>
+<div class="line">        <span class="stringliteral">&quot;c&quot;</span>, </div>
+<div class="line">        <a class="code hl_variable" href="#aef5b2ca383b2d34d19d448e632bb4f1e">C_HL_EXT</a>, <a class="code hl_variable" href="#a3e9fdd221dff5eced4ccf43705fe9414">C_HL_KEY</a>, </div>
+<div class="line">        <span class="stringliteral">&quot;//&quot;</span>, <span class="stringliteral">&quot;/*&quot;</span>, <span class="stringliteral">&quot;*/&quot;</span>,</div>
+<div class="line">        HL_SYN_NUMBERS | HL_SYN_STRINGS</div>
+<div class="line">    },</div>
+<div class="line">}</div>
+<div class="ttc" id="amain_8c_html_a3e9fdd221dff5eced4ccf43705fe9414"><div class="ttname"><a href="#a3e9fdd221dff5eced4ccf43705fe9414">C_HL_KEY</a></div><div class="ttdeci">char * C_HL_KEY[]</div><div class="ttdef"><b>Definition</b> main.c:100</div></div>
+<div class="ttc" id="amain_8c_html_aef5b2ca383b2d34d19d448e632bb4f1e"><div class="ttname"><a href="#aef5b2ca383b2d34d19d448e632bb4f1e">C_HL_EXT</a></div><div class="ttdeci">char * C_HL_EXT[]</div><div class="ttdef"><b>Definition</b> main.c:98</div></div>
+</div><!-- fragment --><p>语法突出数据库 </p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="main_8c.html">main.c</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+  </ul>
+</div>
+</body>
+</html>

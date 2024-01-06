@@ -1,0 +1,918 @@
+\doxysection{src/main.c 文件参考}
+\hypertarget{main_8c}{}\label{main_8c}\index{src/main.c@{src/main.c}}
+
+
+主程序入口  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$termios.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+\doxysubsubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structesyn}{esyn}}
+\begin{DoxyCompactList}\small\item\em 对特定文件类型的语法突出显示信息 \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structerow}{erow}}
+\begin{DoxyCompactList}\small\item\em 编辑器行 \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structeditor__config}{editor\+\_\+config}}
+\begin{DoxyCompactList}\small\item\em 编辑器配置结构体，保存了编辑器的信息。 \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structabuf}{abuf}}
+\begin{DoxyCompactList}\small\item\em 追加缓冲区结构体 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8c_a8fb447618db946a9e2a596d9ea18763f}\label{main_8c_a8fb447618db946a9e2a596d9ea18763f} 
+\#define {\bfseries \+\_\+\+DEFAULT\+\_\+\+SOURCE}
+\item 
+\Hypertarget{main_8c_ad3d8a3bd0c0b677acef144f2c2ef6d73}\label{main_8c_ad3d8a3bd0c0b677acef144f2c2ef6d73} 
+\#define {\bfseries \+\_\+\+BSD\+\_\+\+SOURCE}
+\item 
+\Hypertarget{main_8c_a369266c24eacffb87046522897a570d5}\label{main_8c_a369266c24eacffb87046522897a570d5} 
+\#define {\bfseries \+\_\+\+GNU\+\_\+\+SOURCE}
+\item 
+\#define \mbox{\hyperlink{main_8c_ab00b3e840654ae945c059938b17b375f}{TEXC\+\_\+\+VERSION}}~"{}0.\+0.\+1"{}
+\item 
+\#define \mbox{\hyperlink{main_8c_a6ad38d024c3548be5f50d7fc0679664a}{CTRL\+\_\+\+KEY}}(k)~((k) \& 0x1f)
+\item 
+\#define \mbox{\hyperlink{main_8c_acc269b479b18fbda6ce99bd682d2280e}{TAB\+\_\+\+STOP}}~8
+\item 
+\#define \mbox{\hyperlink{main_8c_a03d3f54c622fea475aef39f7195ec842}{QUIT\+\_\+\+TIMES}}~2
+\item 
+\Hypertarget{main_8c_ad86a68ed5bc97d62e81d76604fa5a62d}\label{main_8c_ad86a68ed5bc97d62e81d76604fa5a62d} 
+\#define {\bfseries HL\+\_\+\+SYN\+\_\+\+NUMBERS}~(1 $<$$<$ 0)
+\item 
+\Hypertarget{main_8c_a798a54cb864d6662589247feeceef487}\label{main_8c_a798a54cb864d6662589247feeceef487} 
+\#define {\bfseries HL\+\_\+\+SYN\+\_\+\+STRINGS}~(1 $<$$<$ 1)
+\item 
+\#define \mbox{\hyperlink{main_8c_ac72d068a4180c7a8e9ea0feebc0013ef}{HLDB\+\_\+\+ENTRIES}}~(sizeof(\mbox{\hyperlink{main_8c_ab528a290dca979d323e7f394addcda06}{HLDB}}) / sizeof(\mbox{\hyperlink{main_8c_ab528a290dca979d323e7f394addcda06}{HLDB}}\mbox{[}0\mbox{]}))
+\item 
+\#define \mbox{\hyperlink{main_8c_a338375e0d9379e2c297acac89c4049e7}{ABUF\+\_\+\+INIT}}~\{NULL, 0\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{类型定义}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8c_a4b331922880c1076c8a24808e021a1d8}\label{main_8c_a4b331922880c1076c8a24808e021a1d8} 
+typedef struct \mbox{\hyperlink{structesyn}{esyn}} {\bfseries esyn\+\_\+t}
+\begin{DoxyCompactList}\small\item\em 对特定文件类型的语法突出显示信息 \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structerow}{erow}} \mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em 编辑器行 \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a9c9bd350cced73f0e92cafebcb8bf1ec}\label{main_8c_a9c9bd350cced73f0e92cafebcb8bf1ec} 
+typedef struct \mbox{\hyperlink{structeditor__config}{editor\+\_\+config}} {\bfseries editor\+\_\+config\+\_\+t}
+\begin{DoxyCompactList}\small\item\em 编辑器配置结构体，保存了编辑器的信息。 \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structabuf}{abuf}} \mbox{\hyperlink{main_8c_a625087503a734e044bf9d7a087e8826e}{abuf\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em 追加缓冲区结构体 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{枚举}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{main_8c_ae8516053d564d4f1040e8f69d2f5e1a8}{editor\+\_\+key}} \{ \newline
+{\bfseries BACK\+\_\+\+SPACE} = 127
+, {\bfseries ARROW\+\_\+\+LEFT} = 1000
+, {\bfseries ARROW\+\_\+\+RIGHT}
+, {\bfseries ARROW\+\_\+\+UP}
+, \newline
+{\bfseries ARROW\+\_\+\+DOWN}
+, {\bfseries DEL\+\_\+\+KEY}
+, {\bfseries HOME\+\_\+\+KEY}
+, {\bfseries END\+\_\+\+KEY}
+, \newline
+{\bfseries PAGE\+\_\+\+UP}
+, {\bfseries PAGE\+\_\+\+DOWN}
+ \}
+\begin{DoxyCompactList}\small\item\em 编辑器控制键入配置 \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a81ce53abcfc3abad013b2858b3e91f3c}\label{main_8c_a81ce53abcfc3abad013b2858b3e91f3c} 
+enum {\bfseries editor\+\_\+highlight} \{ \newline
+{\bfseries HL\+\_\+\+NORMAL} = 0
+, {\bfseries HL\+\_\+\+STRING}
+, {\bfseries HL\+\_\+\+NUMBER}
+, {\bfseries HL\+\_\+\+COMMENT}
+, \newline
+{\bfseries HL\+\_\+\+MLCOMMENT}
+, {\bfseries HL\+\_\+\+KEYWORD1}
+, {\bfseries HL\+\_\+\+KEYWORD2}
+, {\bfseries HL\+\_\+\+MATCH}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8c_a902759df5a103aee802ea2e2af83ecfe}{abuf\+\_\+append}} (\mbox{\hyperlink{main_8c_a625087503a734e044bf9d7a087e8826e}{abuf\+\_\+t}} \texorpdfstring{$\ast$}{*}ab, const char \texorpdfstring{$\ast$}{*}s, int len)
+\begin{DoxyCompactList}\small\item\em 缓冲区追加字符串 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a2f3dd675042479bb08c01fac07ba5887}{abuf\+\_\+free}} (\mbox{\hyperlink{main_8c_a625087503a734e044bf9d7a087e8826e}{abuf\+\_\+t}} \texorpdfstring{$\ast$}{*}ab)
+\begin{DoxyCompactList}\small\item\em 释放追加缓冲区 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a902068fc1db96a09b049e0eef1ef09d4}{editor\+\_\+set\+\_\+status\+\_\+msg}} (const char \texorpdfstring{$\ast$}{*}fmt,...)
+\begin{DoxyCompactList}\small\item\em 编辑器设置状态栏消息 \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a5e241125e49d43bfb08d9509915dd406}\label{main_8c_a5e241125e49d43bfb08d9509915dd406} 
+void {\bfseries editor\+\_\+refresh\+\_\+screen} ()
+\begin{DoxyCompactList}\small\item\em 编辑器清除屏幕 \end{DoxyCompactList}\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_ab8ec1c7e504dbf78cf565f0cd66cbafd}{editor\+\_\+prompt}} (char \texorpdfstring{$\ast$}{*}prompt, void(\texorpdfstring{$\ast$}{*}callback)(char \texorpdfstring{$\ast$}{*}, int))
+\begin{DoxyCompactList}\small\item\em 编辑器显示提示，提供文本输入 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a465bed984e3f89d3fbd759706aa9b03f}{fatal}} (const char \texorpdfstring{$\ast$}{*}s)
+\begin{DoxyCompactList}\small\item\em 错误处理：打印错误信息 \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_abe709e6bcc6b857e4f01fd60b6428fad}\label{main_8c_abe709e6bcc6b857e4f01fd60b6428fad} 
+void {\bfseries disable\+\_\+raw\+\_\+mode} ()
+\begin{DoxyCompactList}\small\item\em 关闭原始文本模式：参考{\ttfamily enable\+\_\+raw\+\_\+mode} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a387166a0b91006891f6f339e47a07191}{enable\+\_\+raw\+\_\+mode}} ()
+\begin{DoxyCompactList}\small\item\em 开启原始文本模式 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8c_af89f5cc3c97a546a3b0f01c1d84ef78c}{editor\+\_\+read\+\_\+key}} ()
+\begin{DoxyCompactList}\small\item\em 编辑器读取键入 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8c_a17caa6f28f0fbd3c7bf35756e0920af4}{get\+\_\+cursor\+\_\+position}} (int \texorpdfstring{$\ast$}{*}rows, int \texorpdfstring{$\ast$}{*}cols)
+\begin{DoxyCompactList}\small\item\em 获取光标位置 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8c_acd227cefe18539d93a2f8379d9aaf55c}{get\+\_\+window\+\_\+size}} (int \texorpdfstring{$\ast$}{*}rows, int \texorpdfstring{$\ast$}{*}cols)
+\begin{DoxyCompactList}\small\item\em 获取窗口大小 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8c_afd2ade8d4e20fc9e78850fa3ccd61ef3}{is\+\_\+separator}} (int c)
+\begin{DoxyCompactList}\small\item\em 是否为分隔符 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_ac93a7021a77e431e10ae765100e56e21}{editor\+\_\+update\+\_\+syntax}} (\mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}} \texorpdfstring{$\ast$}{*}row)
+\begin{DoxyCompactList}\small\item\em 编辑器更新语法高亮 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8c_a214ba3337bb6709222478812cce17ca7}{editor\+\_\+syn2col}} (int hl)
+\begin{DoxyCompactList}\small\item\em 编辑器语法转颜色 \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a045f08c2794bd61e1d463269ca50ad01}\label{main_8c_a045f08c2794bd61e1d463269ca50ad01} 
+void {\bfseries editor\+\_\+select\+\_\+syntax\+\_\+highlight} ()
+\begin{DoxyCompactList}\small\item\em 编辑器匹配文件名的语法高亮 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8c_a52f878cab5b3c42e42d05bd0cf92b722}{editor\+\_\+row\+\_\+cx2rx}} (\mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}} \texorpdfstring{$\ast$}{*}row, int cx)
+\begin{DoxyCompactList}\small\item\em 将字符索引转换为渲染索引 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8c_a0003ea1221a22fee2cb0e580f98d76f1}{editor\+\_\+row\+\_\+rx2cx}} (\mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}} \texorpdfstring{$\ast$}{*}row, int rx)
+\begin{DoxyCompactList}\small\item\em 将渲染索引转换为字符索引 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a8e385088ea297f52dc01abb5673c03b9}{editor\+\_\+update\+\_\+row}} (\mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}} \texorpdfstring{$\ast$}{*}row)
+\begin{DoxyCompactList}\small\item\em 编辑器（更新）渲染行 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_ab6101d0a5a3aa90a84d636140bfe37ab}{editor\+\_\+insert\+\_\+row}} (int at, char \texorpdfstring{$\ast$}{*}s, size\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em 编辑器加入行 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_afd021275ad814d33aff7ecf9d6212244}{editor\+\_\+free\+\_\+row}} (\mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}} \texorpdfstring{$\ast$}{*}row)
+\begin{DoxyCompactList}\small\item\em 编辑器释放行 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_aaff245aacc8bd17e4362ed8e488968ae}{editor\+\_\+del\+\_\+row}} (int at)
+\begin{DoxyCompactList}\small\item\em 编辑器删除行 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a2cebbd01ba082e916455f53c78a5b918}{editor\+\_\+row\+\_\+insert\+\_\+char}} (\mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}} \texorpdfstring{$\ast$}{*}row, int at, int c)
+\begin{DoxyCompactList}\small\item\em 在给定位置插入单个字符到{\ttfamily erow} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a3742c3bd487dcb176f08ed147e2029b0}{editor\+\_\+row\+\_\+append\+\_\+str}} (\mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}} \texorpdfstring{$\ast$}{*}row, char \texorpdfstring{$\ast$}{*}s, size\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em 编辑器行加入字符串 \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_aaa643392f956bfc06ebdd495cf4712d0}\label{main_8c_aaa643392f956bfc06ebdd495cf4712d0} 
+void {\bfseries editor\+\_\+row\+\_\+del\+\_\+char} (\mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}} \texorpdfstring{$\ast$}{*}row, int at)
+\item 
+void \mbox{\hyperlink{main_8c_a8fb39e9062388536f21833ee8ed8e078}{editor\+\_\+insert\+\_\+char}} (int c)
+\begin{DoxyCompactList}\small\item\em 编辑器插入字符 \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_af7e9d26746afb2bcc7d657b2694ccfff}\label{main_8c_af7e9d26746afb2bcc7d657b2694ccfff} 
+void {\bfseries editor\+\_\+insert\+\_\+newline} ()
+\begin{DoxyCompactList}\small\item\em 编辑器插入新行 \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_af409d75c63a51bbfd4480816a042b3aa}\label{main_8c_af409d75c63a51bbfd4480816a042b3aa} 
+void {\bfseries editor\+\_\+del\+\_\+char} ()
+\begin{DoxyCompactList}\small\item\em 编辑器删除字符 \end{DoxyCompactList}\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a6f7c55082bdb76feb6e144f89114280d}{editor\+\_\+rows2str}} (int \texorpdfstring{$\ast$}{*}str\+\_\+len)
+\begin{DoxyCompactList}\small\item\em 编辑器行转化为字符串 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a549d6f4701e7912ed77bbf9c7d51d5a4}{editor\+\_\+open}} (char \texorpdfstring{$\ast$}{*}filename)
+\begin{DoxyCompactList}\small\item\em 编辑器打开文件 \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a0a605f100726e515f1a255cca5222955}\label{main_8c_a0a605f100726e515f1a255cca5222955} 
+void {\bfseries editor\+\_\+save} ()
+\begin{DoxyCompactList}\small\item\em 编辑器保存 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a1d9125f91b6c4a0153b85c64bb6cc245}{editor\+\_\+find\+\_\+callback}} (char \texorpdfstring{$\ast$}{*}query, int key)
+\begin{DoxyCompactList}\small\item\em 编辑器查找回调函数 \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a5748e0230bb318a5f878314c67437d55}\label{main_8c_a5748e0230bb318a5f878314c67437d55} 
+void {\bfseries editor\+\_\+find} ()
+\begin{DoxyCompactList}\small\item\em 编辑器寻找字符串 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a093ea6b1c1a7a57bd5ed8d5660564ae7}{editor\+\_\+scroll}} ()
+\begin{DoxyCompactList}\small\item\em 编辑器滚动 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a3f6ab2a62fa10c6ba766b3b8ab9eb27b}{editor\+\_\+draw\+\_\+rows}} (\mbox{\hyperlink{main_8c_a625087503a734e044bf9d7a087e8826e}{abuf\+\_\+t}} \texorpdfstring{$\ast$}{*}ab)
+\begin{DoxyCompactList}\small\item\em 编辑器绘制行 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_af8825837d22fb447b5dfb2746ae554c4}{editor\+\_\+draw\+\_\+status\+\_\+bar}} (\mbox{\hyperlink{main_8c_a625087503a734e044bf9d7a087e8826e}{abuf\+\_\+t}} \texorpdfstring{$\ast$}{*}ab)
+\begin{DoxyCompactList}\small\item\em 编辑器绘制状态栏 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_ae050bf5ab3789cbe707b0ff52a70351d}{editor\+\_\+draw\+\_\+status\+\_\+msg}} (\mbox{\hyperlink{main_8c_a625087503a734e044bf9d7a087e8826e}{abuf\+\_\+t}} \texorpdfstring{$\ast$}{*}ab)
+\begin{DoxyCompactList}\small\item\em 编辑器绘制状态栏消息 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_ae2348d0cdb4ff58691871d78b8140bbb}{editor\+\_\+move\+\_\+cursor}} (int key)
+\begin{DoxyCompactList}\small\item\em 编辑器移动光标位置 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a5ea6b91254bc1b912cdf085bea1c9f68}{editor\+\_\+proc\+\_\+key}} ()
+\begin{DoxyCompactList}\small\item\em 编辑器处理键入 \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a5a2630f404abd0bb49b4a34591a91144}\label{main_8c_a5a2630f404abd0bb49b4a34591a91144} 
+void {\bfseries editor\+\_\+init} ()
+\begin{DoxyCompactList}\small\item\em 编辑器初始化 \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{main_8c_a0ddf1224851353fc92bfbff6f499fa97} 
+int {\bfseries main} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_aef5b2ca383b2d34d19d448e632bb4f1e}{C\+\_\+\+HL\+\_\+\+EXT}} \mbox{[}$\,$\mbox{]} = \{"{}.c"{}, "{}.h"{}, "{}.cpp"{}, NULL\}
+\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a3e9fdd221dff5eced4ccf43705fe9414}{C\+\_\+\+HL\+\_\+\+KEY}} \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\hyperlink{main_8c_a4b331922880c1076c8a24808e021a1d8}{esyn\+\_\+t}} \mbox{\hyperlink{main_8c_ab528a290dca979d323e7f394addcda06}{HLDB}} \mbox{[}$\,$\mbox{]}
+\item 
+\Hypertarget{main_8c_a272c9a68e121649f71da628cb8f08333}\label{main_8c_a272c9a68e121649f71da628cb8f08333} 
+\mbox{\hyperlink{main_8c_a9c9bd350cced73f0e92cafebcb8bf1ec}{editor\+\_\+config\+\_\+t}} {\bfseries ec}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+主程序入口 
+
+\begin{DoxyAuthor}{作者}
+lancer (\href{mailto:lancerstadium@163.com}{\texttt{ lancerstadium@163.\+com}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{版本}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{日期}
+2024-\/01-\/05 
+\end{DoxyDate}
+\begin{DoxyCopyright}{版权所有}
+Copyright (c) 2024 
+\end{DoxyCopyright}
+\begin{DoxyNote}{注解}
+参考项目：\href{https://viewsourcecode.org/snaptoken/kilo}{\texttt{ 文本编辑器 \texorpdfstring{$\vert$}{|} kilo}} 
+\end{DoxyNote}
+
+
+\doxysubsection{宏定义说明}
+\Hypertarget{main_8c_a338375e0d9379e2c297acac89c4049e7}\label{main_8c_a338375e0d9379e2c297acac89c4049e7} 
+\index{main.c@{main.c}!ABUF\_INIT@{ABUF\_INIT}}
+\index{ABUF\_INIT@{ABUF\_INIT}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{ABUF\_INIT}{ABUF\_INIT}}
+{\footnotesize\ttfamily \#define ABUF\+\_\+\+INIT~\{NULL, 0\}}
+
+追加缓冲区初始化 \Hypertarget{main_8c_a6ad38d024c3548be5f50d7fc0679664a}\label{main_8c_a6ad38d024c3548be5f50d7fc0679664a} 
+\index{main.c@{main.c}!CTRL\_KEY@{CTRL\_KEY}}
+\index{CTRL\_KEY@{CTRL\_KEY}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{CTRL\_KEY}{CTRL\_KEY}}
+{\footnotesize\ttfamily \#define CTRL\+\_\+\+KEY(\begin{DoxyParamCaption}\item[{}]{k }\end{DoxyParamCaption})~((k) \& 0x1f)}
+
+切换宏{\ttfamily CRTL+k}：按位对二进制值{\ttfamily 00011111}进行{\ttfamily AND}。 \Hypertarget{main_8c_ac72d068a4180c7a8e9ea0feebc0013ef}\label{main_8c_ac72d068a4180c7a8e9ea0feebc0013ef} 
+\index{main.c@{main.c}!HLDB\_ENTRIES@{HLDB\_ENTRIES}}
+\index{HLDB\_ENTRIES@{HLDB\_ENTRIES}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{HLDB\_ENTRIES}{HLDB\_ENTRIES}}
+{\footnotesize\ttfamily \#define HLDB\+\_\+\+ENTRIES~(sizeof(\mbox{\hyperlink{main_8c_ab528a290dca979d323e7f394addcda06}{HLDB}}) / sizeof(\mbox{\hyperlink{main_8c_ab528a290dca979d323e7f394addcda06}{HLDB}}\mbox{[}0\mbox{]}))}
+
+语法突出数据库大小 \Hypertarget{main_8c_a03d3f54c622fea475aef39f7195ec842}\label{main_8c_a03d3f54c622fea475aef39f7195ec842} 
+\index{main.c@{main.c}!QUIT\_TIMES@{QUIT\_TIMES}}
+\index{QUIT\_TIMES@{QUIT\_TIMES}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{QUIT\_TIMES}{QUIT\_TIMES}}
+{\footnotesize\ttfamily \#define QUIT\+\_\+\+TIMES~2}
+
+如果设置了{\ttfamily ec.\+dirty}，将在状态栏中显示警告：要求用户再按{\ttfamily Ctrl-\/Q}两次才能退出而不保存 \Hypertarget{main_8c_acc269b479b18fbda6ce99bd682d2280e}\label{main_8c_acc269b479b18fbda6ce99bd682d2280e} 
+\index{main.c@{main.c}!TAB\_STOP@{TAB\_STOP}}
+\index{TAB\_STOP@{TAB\_STOP}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{TAB\_STOP}{TAB\_STOP}}
+{\footnotesize\ttfamily \#define TAB\+\_\+\+STOP~8}
+
+制表位的长度常量 \Hypertarget{main_8c_ab00b3e840654ae945c059938b17b375f}\label{main_8c_ab00b3e840654ae945c059938b17b375f} 
+\index{main.c@{main.c}!TEXC\_VERSION@{TEXC\_VERSION}}
+\index{TEXC\_VERSION@{TEXC\_VERSION}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{TEXC\_VERSION}{TEXC\_VERSION}}
+{\footnotesize\ttfamily \#define TEXC\+\_\+\+VERSION~"{}0.\+0.\+1"{}}
+
+{\ttfamily texc}版本 
+
+\doxysubsection{类型定义说明}
+\Hypertarget{main_8c_a625087503a734e044bf9d7a087e8826e}\label{main_8c_a625087503a734e044bf9d7a087e8826e} 
+\index{main.c@{main.c}!abuf\_t@{abuf\_t}}
+\index{abuf\_t@{abuf\_t}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{abuf\_t}{abuf\_t}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structabuf}{abuf}} \mbox{\hyperlink{main_8c_a625087503a734e044bf9d7a087e8826e}{abuf\+\_\+t}}}
+
+
+
+追加缓冲区结构体 
+
+全局编辑器配置实例 \Hypertarget{main_8c_a3286f23de1bf8554398edc8987b6d587}\label{main_8c_a3286f23de1bf8554398edc8987b6d587} 
+\index{main.c@{main.c}!erow\_t@{erow\_t}}
+\index{erow\_t@{erow\_t}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{erow\_t}{erow\_t}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structerow}{erow}} \mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}}}
+
+
+
+编辑器行 
+
+\begin{DoxyNote}{注解}
+将一行文本存储为指向动态分配的字符数据的指针和其长度 
+\end{DoxyNote}
+
+
+\doxysubsection{枚举类型说明}
+\Hypertarget{main_8c_ae8516053d564d4f1040e8f69d2f5e1a8}\label{main_8c_ae8516053d564d4f1040e8f69d2f5e1a8} 
+\index{main.c@{main.c}!editor\_key@{editor\_key}}
+\index{editor\_key@{editor\_key}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_key}{editor\_key}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{main_8c_ae8516053d564d4f1040e8f69d2f5e1a8}{editor\+\_\+key}}}
+
+
+
+编辑器控制键入配置 
+
+\begin{DoxyNote}{注解}
+按键冲突处理 现在我们只需在{\ttfamily editor\+\_\+key}枚举中选择 与{\ttfamily wasd}不冲突的箭头键表示形式即可。 我们将为它们提供一个超出字符范围的大整数值， 以便它们不会与任何普通按键冲突。 
+\end{DoxyNote}
+
+
+\doxysubsection{函数说明}
+\Hypertarget{main_8c_a902759df5a103aee802ea2e2af83ecfe}\label{main_8c_a902759df5a103aee802ea2e2af83ecfe} 
+\index{main.c@{main.c}!abuf\_append@{abuf\_append}}
+\index{abuf\_append@{abuf\_append}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{abuf\_append()}{abuf\_append()}}
+{\footnotesize\ttfamily void abuf\+\_\+append (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_a625087503a734e044bf9d7a087e8826e}{abuf\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ab,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{s,  }\item[{int}]{len }\end{DoxyParamCaption})}
+
+
+
+缓冲区追加字符串 
+
+
+\begin{DoxyParams}{参数}
+{\em ab} & 追加缓冲区 \\
+\hline
+{\em s} & 字符串 \\
+\hline
+{\em len} & 字符串长度 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a2f3dd675042479bb08c01fac07ba5887}\label{main_8c_a2f3dd675042479bb08c01fac07ba5887} 
+\index{main.c@{main.c}!abuf\_free@{abuf\_free}}
+\index{abuf\_free@{abuf\_free}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{abuf\_free()}{abuf\_free()}}
+{\footnotesize\ttfamily void abuf\+\_\+free (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_a625087503a734e044bf9d7a087e8826e}{abuf\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ab }\end{DoxyParamCaption})}
+
+
+
+释放追加缓冲区 
+
+
+\begin{DoxyParams}{参数}
+{\em ab} & 追加缓冲区 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_aaff245aacc8bd17e4362ed8e488968ae}\label{main_8c_aaff245aacc8bd17e4362ed8e488968ae} 
+\index{main.c@{main.c}!editor\_del\_row@{editor\_del\_row}}
+\index{editor\_del\_row@{editor\_del\_row}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_del\_row()}{editor\_del\_row()}}
+{\footnotesize\ttfamily void editor\+\_\+del\+\_\+row (\begin{DoxyParamCaption}\item[{int}]{at }\end{DoxyParamCaption})}
+
+
+
+编辑器删除行 
+
+
+\begin{DoxyParams}{参数}
+{\em at} & 行号 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a3f6ab2a62fa10c6ba766b3b8ab9eb27b}\label{main_8c_a3f6ab2a62fa10c6ba766b3b8ab9eb27b} 
+\index{main.c@{main.c}!editor\_draw\_rows@{editor\_draw\_rows}}
+\index{editor\_draw\_rows@{editor\_draw\_rows}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_draw\_rows()}{editor\_draw\_rows()}}
+{\footnotesize\ttfamily void editor\+\_\+draw\+\_\+rows (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_a625087503a734e044bf9d7a087e8826e}{abuf\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ab }\end{DoxyParamCaption})}
+
+
+
+编辑器绘制行 
+
+
+\begin{DoxyParams}{参数}
+{\em ab} & 追加缓冲区 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{注解}
+类似{\ttfamily vim}左侧的波浪。
+\begin{DoxyItemize}
+\item 我们打印最后一个波形符时， 会像在任何其他行上一样打印“\textbackslash{}r~\newline
+”， 但这会导致终端滚动以便为新的空白行腾出空间。 故打印“\textbackslash{}r~\newline
+”时，需要让最后一行成为例外。 
+\end{DoxyItemize}
+\end{DoxyNote}
+\Hypertarget{main_8c_af8825837d22fb447b5dfb2746ae554c4}\label{main_8c_af8825837d22fb447b5dfb2746ae554c4} 
+\index{main.c@{main.c}!editor\_draw\_status\_bar@{editor\_draw\_status\_bar}}
+\index{editor\_draw\_status\_bar@{editor\_draw\_status\_bar}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_draw\_status\_bar()}{editor\_draw\_status\_bar()}}
+{\footnotesize\ttfamily void editor\+\_\+draw\+\_\+status\+\_\+bar (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_a625087503a734e044bf9d7a087e8826e}{abuf\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ab }\end{DoxyParamCaption})}
+
+
+
+编辑器绘制状态栏 
+
+
+\begin{DoxyParams}{参数}
+{\em ab} & 追加缓冲区 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_ae050bf5ab3789cbe707b0ff52a70351d}\label{main_8c_ae050bf5ab3789cbe707b0ff52a70351d} 
+\index{main.c@{main.c}!editor\_draw\_status\_msg@{editor\_draw\_status\_msg}}
+\index{editor\_draw\_status\_msg@{editor\_draw\_status\_msg}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_draw\_status\_msg()}{editor\_draw\_status\_msg()}}
+{\footnotesize\ttfamily void editor\+\_\+draw\+\_\+status\+\_\+msg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_a625087503a734e044bf9d7a087e8826e}{abuf\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ab }\end{DoxyParamCaption})}
+
+
+
+编辑器绘制状态栏消息 
+
+
+\begin{DoxyParams}{参数}
+{\em ab} & 追加缓冲区 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a1d9125f91b6c4a0153b85c64bb6cc245}\label{main_8c_a1d9125f91b6c4a0153b85c64bb6cc245} 
+\index{main.c@{main.c}!editor\_find\_callback@{editor\_find\_callback}}
+\index{editor\_find\_callback@{editor\_find\_callback}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_find\_callback()}{editor\_find\_callback()}}
+{\footnotesize\ttfamily void editor\+\_\+find\+\_\+callback (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{query,  }\item[{int}]{key }\end{DoxyParamCaption})}
+
+
+
+编辑器查找回调函数 
+
+
+\begin{DoxyParams}{参数}
+{\em query} & 查询字符串 \\
+\hline
+{\em key} & 键入 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_afd021275ad814d33aff7ecf9d6212244}\label{main_8c_afd021275ad814d33aff7ecf9d6212244} 
+\index{main.c@{main.c}!editor\_free\_row@{editor\_free\_row}}
+\index{editor\_free\_row@{editor\_free\_row}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_free\_row()}{editor\_free\_row()}}
+{\footnotesize\ttfamily void editor\+\_\+free\+\_\+row (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{row }\end{DoxyParamCaption})}
+
+
+
+编辑器释放行 
+
+
+\begin{DoxyParams}{参数}
+{\em row} & 编辑器行 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a8fb39e9062388536f21833ee8ed8e078}\label{main_8c_a8fb39e9062388536f21833ee8ed8e078} 
+\index{main.c@{main.c}!editor\_insert\_char@{editor\_insert\_char}}
+\index{editor\_insert\_char@{editor\_insert\_char}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_insert\_char()}{editor\_insert\_char()}}
+{\footnotesize\ttfamily void editor\+\_\+insert\+\_\+char (\begin{DoxyParamCaption}\item[{int}]{c }\end{DoxyParamCaption})}
+
+
+
+编辑器插入字符 
+
+
+\begin{DoxyParams}{参数}
+{\em c} & 字符 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_ab6101d0a5a3aa90a84d636140bfe37ab}\label{main_8c_ab6101d0a5a3aa90a84d636140bfe37ab} 
+\index{main.c@{main.c}!editor\_insert\_row@{editor\_insert\_row}}
+\index{editor\_insert\_row@{editor\_insert\_row}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_insert\_row()}{editor\_insert\_row()}}
+{\footnotesize\ttfamily void editor\+\_\+insert\+\_\+row (\begin{DoxyParamCaption}\item[{int}]{at,  }\item[{char \texorpdfstring{$\ast$}{*}}]{s,  }\item[{size\+\_\+t}]{len }\end{DoxyParamCaption})}
+
+
+
+编辑器加入行 
+
+
+\begin{DoxyParams}{参数}
+{\em at} & 行号 \\
+\hline
+{\em s} & 行字符串 \\
+\hline
+{\em len} & 行长度 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_ae2348d0cdb4ff58691871d78b8140bbb}\label{main_8c_ae2348d0cdb4ff58691871d78b8140bbb} 
+\index{main.c@{main.c}!editor\_move\_cursor@{editor\_move\_cursor}}
+\index{editor\_move\_cursor@{editor\_move\_cursor}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_move\_cursor()}{editor\_move\_cursor()}}
+{\footnotesize\ttfamily void editor\+\_\+move\+\_\+cursor (\begin{DoxyParamCaption}\item[{int}]{key }\end{DoxyParamCaption})}
+
+
+
+编辑器移动光标位置 
+
+
+\begin{DoxyParams}{参数}
+{\em key} & 键入字符 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a549d6f4701e7912ed77bbf9c7d51d5a4}\label{main_8c_a549d6f4701e7912ed77bbf9c7d51d5a4} 
+\index{main.c@{main.c}!editor\_open@{editor\_open}}
+\index{editor\_open@{editor\_open}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_open()}{editor\_open()}}
+{\footnotesize\ttfamily void editor\+\_\+open (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{filename }\end{DoxyParamCaption})}
+
+
+
+编辑器打开文件 
+
+
+\begin{DoxyParams}{参数}
+{\em filename} & 文件名 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a5ea6b91254bc1b912cdf085bea1c9f68}\label{main_8c_a5ea6b91254bc1b912cdf085bea1c9f68} 
+\index{main.c@{main.c}!editor\_proc\_key@{editor\_proc\_key}}
+\index{editor\_proc\_key@{editor\_proc\_key}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_proc\_key()}{editor\_proc\_key()}}
+{\footnotesize\ttfamily void editor\+\_\+proc\+\_\+key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+编辑器处理键入 
+
+TODO\+: 处理特殊字符\Hypertarget{main_8c_ab8ec1c7e504dbf78cf565f0cd66cbafd}\label{main_8c_ab8ec1c7e504dbf78cf565f0cd66cbafd} 
+\index{main.c@{main.c}!editor\_prompt@{editor\_prompt}}
+\index{editor\_prompt@{editor\_prompt}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_prompt()}{editor\_prompt()}}
+{\footnotesize\ttfamily char \texorpdfstring{$\ast$}{*} editor\+\_\+prompt (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{prompt,  }\item[{void(\texorpdfstring{$\ast$}{*})(char \texorpdfstring{$\ast$}{*}, int)}]{callback }\end{DoxyParamCaption})}
+
+
+
+编辑器显示提示，提供文本输入 
+
+
+\begin{DoxyParams}{参数}
+{\em prompt} & 提示信息 \\
+\hline
+{\em callback} & 回调函数 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+char\texorpdfstring{$\ast$}{*} 输入信息 
+\end{DoxyReturn}
+\Hypertarget{main_8c_af89f5cc3c97a546a3b0f01c1d84ef78c}\label{main_8c_af89f5cc3c97a546a3b0f01c1d84ef78c} 
+\index{main.c@{main.c}!editor\_read\_key@{editor\_read\_key}}
+\index{editor\_read\_key@{editor\_read\_key}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_read\_key()}{editor\_read\_key()}}
+{\footnotesize\ttfamily int editor\+\_\+read\+\_\+key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+编辑器读取键入 
+
+\begin{DoxyReturn}{返回}
+char 键入字符 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+Arrow 转义字符处理
+\begin{DoxyItemize}
+\item 如果我们读取一个转义字符，会立即将另外两个字节读入{\ttfamily seq}缓冲区。 如果其中任何一个读数超时（0.1 秒后）， 则假设用户只是按下了 Escape 键并返回该键。 否则，会查看转义序列是否为箭头键转义序列。 
+\end{DoxyItemize}
+\end{DoxyNote}
+\Hypertarget{main_8c_a3742c3bd487dcb176f08ed147e2029b0}\label{main_8c_a3742c3bd487dcb176f08ed147e2029b0} 
+\index{main.c@{main.c}!editor\_row\_append\_str@{editor\_row\_append\_str}}
+\index{editor\_row\_append\_str@{editor\_row\_append\_str}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_row\_append\_str()}{editor\_row\_append\_str()}}
+{\footnotesize\ttfamily void editor\+\_\+row\+\_\+append\+\_\+str (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{row,  }\item[{char \texorpdfstring{$\ast$}{*}}]{s,  }\item[{size\+\_\+t}]{len }\end{DoxyParamCaption})}
+
+
+
+编辑器行加入字符串 
+
+
+\begin{DoxyParams}{参数}
+{\em row} & 编辑器行 \\
+\hline
+{\em s} & 字符串 \\
+\hline
+{\em len} & 字符串长度 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{注解}
+用于实现删除功能 
+\end{DoxyNote}
+\Hypertarget{main_8c_a52f878cab5b3c42e42d05bd0cf92b722}\label{main_8c_a52f878cab5b3c42e42d05bd0cf92b722} 
+\index{main.c@{main.c}!editor\_row\_cx2rx@{editor\_row\_cx2rx}}
+\index{editor\_row\_cx2rx@{editor\_row\_cx2rx}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_row\_cx2rx()}{editor\_row\_cx2rx()}}
+{\footnotesize\ttfamily int editor\+\_\+row\+\_\+cx2rx (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{row,  }\item[{int}]{cx }\end{DoxyParamCaption})}
+
+
+
+将字符索引转换为渲染索引 
+
+
+\begin{DoxyParams}{参数}
+{\em row} & 编辑器行 \\
+\hline
+{\em cx} & 字符索引 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+int 渲染索引 
+\end{DoxyReturn}
+\Hypertarget{main_8c_a2cebbd01ba082e916455f53c78a5b918}\label{main_8c_a2cebbd01ba082e916455f53c78a5b918} 
+\index{main.c@{main.c}!editor\_row\_insert\_char@{editor\_row\_insert\_char}}
+\index{editor\_row\_insert\_char@{editor\_row\_insert\_char}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_row\_insert\_char()}{editor\_row\_insert\_char()}}
+{\footnotesize\ttfamily void editor\+\_\+row\+\_\+insert\+\_\+char (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{row,  }\item[{int}]{at,  }\item[{int}]{c }\end{DoxyParamCaption})}
+
+
+
+在给定位置插入单个字符到{\ttfamily erow} 
+
+
+\begin{DoxyParams}{参数}
+{\em row} & 编辑器行 \\
+\hline
+{\em at} & 字符索引 \\
+\hline
+{\em c} & 字符 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a0003ea1221a22fee2cb0e580f98d76f1}\label{main_8c_a0003ea1221a22fee2cb0e580f98d76f1} 
+\index{main.c@{main.c}!editor\_row\_rx2cx@{editor\_row\_rx2cx}}
+\index{editor\_row\_rx2cx@{editor\_row\_rx2cx}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_row\_rx2cx()}{editor\_row\_rx2cx()}}
+{\footnotesize\ttfamily int editor\+\_\+row\+\_\+rx2cx (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{row,  }\item[{int}]{rx }\end{DoxyParamCaption})}
+
+
+
+将渲染索引转换为字符索引 
+
+
+\begin{DoxyParams}{参数}
+{\em row} & 编辑器行 \\
+\hline
+{\em rx} & 渲染索引 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+int 字符索引 
+\end{DoxyReturn}
+\Hypertarget{main_8c_a6f7c55082bdb76feb6e144f89114280d}\label{main_8c_a6f7c55082bdb76feb6e144f89114280d} 
+\index{main.c@{main.c}!editor\_rows2str@{editor\_rows2str}}
+\index{editor\_rows2str@{editor\_rows2str}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_rows2str()}{editor\_rows2str()}}
+{\footnotesize\ttfamily char \texorpdfstring{$\ast$}{*} editor\+\_\+rows2str (\begin{DoxyParamCaption}\item[{int \texorpdfstring{$\ast$}{*}}]{str\+\_\+len }\end{DoxyParamCaption})}
+
+
+
+编辑器行转化为字符串 
+
+
+\begin{DoxyParams}{参数}
+{\em str\+\_\+len} & 获取字符串长度 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+char\texorpdfstring{$\ast$}{*} 字符串指针 
+\end{DoxyReturn}
+\Hypertarget{main_8c_a093ea6b1c1a7a57bd5ed8d5660564ae7}\label{main_8c_a093ea6b1c1a7a57bd5ed8d5660564ae7} 
+\index{main.c@{main.c}!editor\_scroll@{editor\_scroll}}
+\index{editor\_scroll@{editor\_scroll}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_scroll()}{editor\_scroll()}}
+{\footnotesize\ttfamily void editor\+\_\+scroll (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+编辑器滚动 
+
+\begin{DoxyNote}{注解}
+设置{\ttfamily ec.\+rowoff}值： 策略是检查光标是否已移出可见窗口， 如果是，则调整{\ttfamily ec.\+rowoff}， 使光标刚好位于可见窗口内。 
+\end{DoxyNote}
+\Hypertarget{main_8c_a902068fc1db96a09b049e0eef1ef09d4}\label{main_8c_a902068fc1db96a09b049e0eef1ef09d4} 
+\index{main.c@{main.c}!editor\_set\_status\_msg@{editor\_set\_status\_msg}}
+\index{editor\_set\_status\_msg@{editor\_set\_status\_msg}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_set\_status\_msg()}{editor\_set\_status\_msg()}}
+{\footnotesize\ttfamily void editor\+\_\+set\+\_\+status\+\_\+msg (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+编辑器设置状态栏消息 
+
+
+\begin{DoxyParams}{参数}
+{\em fmt} & 消息格式化字符串 \\
+\hline
+{\em ...} & 其他参数\\
+\hline
+{\em fmt} & 消息格式化字符串 \\
+\hline
+{\em ...} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a214ba3337bb6709222478812cce17ca7}\label{main_8c_a214ba3337bb6709222478812cce17ca7} 
+\index{main.c@{main.c}!editor\_syn2col@{editor\_syn2col}}
+\index{editor\_syn2col@{editor\_syn2col}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_syn2col()}{editor\_syn2col()}}
+{\footnotesize\ttfamily int editor\+\_\+syn2col (\begin{DoxyParamCaption}\item[{int}]{hl }\end{DoxyParamCaption})}
+
+
+
+编辑器语法转颜色 
+
+
+\begin{DoxyParams}{参数}
+{\em hl} & 语法枚举，参考{\ttfamily dfitor\+\_\+highlight} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+int 颜色 
+\end{DoxyReturn}
+\Hypertarget{main_8c_a8e385088ea297f52dc01abb5673c03b9}\label{main_8c_a8e385088ea297f52dc01abb5673c03b9} 
+\index{main.c@{main.c}!editor\_update\_row@{editor\_update\_row}}
+\index{editor\_update\_row@{editor\_update\_row}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_update\_row()}{editor\_update\_row()}}
+{\footnotesize\ttfamily void editor\+\_\+update\+\_\+row (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{row }\end{DoxyParamCaption})}
+
+
+
+编辑器（更新）渲染行 
+
+
+\begin{DoxyParams}{参数}
+{\em row} & 编辑器行 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_ac93a7021a77e431e10ae765100e56e21}\label{main_8c_ac93a7021a77e431e10ae765100e56e21} 
+\index{main.c@{main.c}!editor\_update\_syntax@{editor\_update\_syntax}}
+\index{editor\_update\_syntax@{editor\_update\_syntax}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{editor\_update\_syntax()}{editor\_update\_syntax()}}
+{\footnotesize\ttfamily void editor\+\_\+update\+\_\+syntax (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{row }\end{DoxyParamCaption})}
+
+
+
+编辑器更新语法高亮 
+
+
+\begin{DoxyParams}{参数}
+{\em row} & 编辑器行 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a387166a0b91006891f6f339e47a07191}\label{main_8c_a387166a0b91006891f6f339e47a07191} 
+\index{main.c@{main.c}!enable\_raw\_mode@{enable\_raw\_mode}}
+\index{enable\_raw\_mode@{enable\_raw\_mode}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{enable\_raw\_mode()}{enable\_raw\_mode()}}
+{\footnotesize\ttfamily void enable\+\_\+raw\+\_\+mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+开启原始文本模式 
+
+\begin{DoxyNote}{注解}
+原始文本模式 需要关闭相关功能并获取等待延迟
+\end{DoxyNote}
+\hypertarget{main_8c_autotoc_md0}{}\doxysubsubsection{\texorpdfstring{关闭特定功能}{关闭特定功能}}\label{main_8c_autotoc_md0}
+
+\begin{DoxyEnumerate}
+\item {\ttfamily ECHO}功能会将键入打印到终端。 在原始模式下渲染编辑器\+UI时， 会妨碍我们输入。
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item 例如，使用{\ttfamily sudo}在终端上输入密码： 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sudo\ apt\ install\ xxx}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}
+\begin{DoxyEnumerate}
+\item {\ttfamily ICANON}功能会逐个字节监测键入， 而不是逐行读取， 不需要按下{\ttfamily Enter}键。
+\item {\ttfamily ISIG}功能会控制如下信号： 默认情况下，{\ttfamily Ctrl-\/C}向当前进程发送{\ttfamily SIGINT}信号， 导致其终止；{\ttfamily Ctrl-\/Z}向当前进程发送{\ttfamily SIGTSTP}信号， 导致其挂起。
+\item {\ttfamily IXON}功能会控制如下软件流信号： 默认情况下，{\ttfamily Ctrl-\/S}停止将数据传输到终端， 直到按{\ttfamily Ctrl-\/Q}。
+\item {\ttfamily IEXTEN}功能会控制如下信号： 键入{\ttfamily Ctrl-\/V}时，终端会等待你键入其他字符， 然后发送该字符。关闭{\ttfamily IEXTEN}还可以修复 mac\+OS{\ttfamily Ctrl-\/O}中的问题。
+\item {\ttfamily ICRNL}功能控制的{\ttfamily Ctrl-\/M}很奇怪： 当我们期望它被读取为{\ttfamily 13}时，它被读取为{\ttfamily 10} 终端有助于将用户输入的任何回车符{\ttfamily （13，\textbackslash{}r）} 转换为换行符{\ttfamily （10，\textbackslash{}n）}，关闭这个功能。
+\item {\ttfamily OPOST}标志控制所有输出处理功能： 在 printf() 语句中添加回车符， 防止光标只向下移动，而不向屏幕的左侧移动。
+\item 其他标志：略
+\end{DoxyEnumerate}\hypertarget{main_8c_autotoc_md1}{}\doxysubsubsection{\texorpdfstring{超时读取}{超时读取}}\label{main_8c_autotoc_md1}
+
+\begin{DoxyEnumerate}
+\item {\ttfamily VMIN}值设置{\ttfamily read()}返回之前所需输入的最小字节数。 我们将其设置为{\ttfamily 0}，以便{\ttfamily read()}在有任何输入要读取时立即返回。
+\item {\ttfamily VTIME}值设置{\ttfamily read()}返回之前等待的最长时间。 它以十分之一秒为单位，因此我们将其设置为{\ttfamily 1/10}秒，即{\ttfamily 100}毫秒。 如果{\ttfamily read()}超时，它将返回{\ttfamily 0}。这是有道理的， 因为它通常的返回值是读取的字节数。 
+\end{DoxyEnumerate}\Hypertarget{main_8c_a465bed984e3f89d3fbd759706aa9b03f}\label{main_8c_a465bed984e3f89d3fbd759706aa9b03f} 
+\index{main.c@{main.c}!fatal@{fatal}}
+\index{fatal@{fatal}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{fatal()}{fatal()}}
+{\footnotesize\ttfamily void fatal (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{s }\end{DoxyParamCaption})}
+
+
+
+错误处理：打印错误信息 
+
+
+\begin{DoxyParams}{参数}
+{\em s} & 错误信息 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a17caa6f28f0fbd3c7bf35756e0920af4}\label{main_8c_a17caa6f28f0fbd3c7bf35756e0920af4} 
+\index{main.c@{main.c}!get\_cursor\_position@{get\_cursor\_position}}
+\index{get\_cursor\_position@{get\_cursor\_position}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{get\_cursor\_position()}{get\_cursor\_position()}}
+{\footnotesize\ttfamily int get\+\_\+cursor\+\_\+position (\begin{DoxyParamCaption}\item[{int \texorpdfstring{$\ast$}{*}}]{rows,  }\item[{int \texorpdfstring{$\ast$}{*}}]{cols }\end{DoxyParamCaption})}
+
+
+
+获取光标位置 
+
+
+\begin{DoxyParams}{参数}
+{\em rows} & 行数 \\
+\hline
+{\em cols} & 列数 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+int 返回值 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em -\/1} & 获取失败 \\
+\hline
+{\em 0} & 获取成功 \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{main_8c_acd227cefe18539d93a2f8379d9aaf55c}\label{main_8c_acd227cefe18539d93a2f8379d9aaf55c} 
+\index{main.c@{main.c}!get\_window\_size@{get\_window\_size}}
+\index{get\_window\_size@{get\_window\_size}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{get\_window\_size()}{get\_window\_size()}}
+{\footnotesize\ttfamily int get\+\_\+window\+\_\+size (\begin{DoxyParamCaption}\item[{int \texorpdfstring{$\ast$}{*}}]{rows,  }\item[{int \texorpdfstring{$\ast$}{*}}]{cols }\end{DoxyParamCaption})}
+
+
+
+获取窗口大小 
+
+
+\begin{DoxyParams}{参数}
+{\em rows} & 行数 \\
+\hline
+{\em cols} & 列数 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+int 返回值 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em -\/1} & 获取失败 \\
+\hline
+{\em 0} & 获取成功 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+自定义获取窗口大小
+\begin{DoxyItemize}
+\item {\ttfamily ioctl()}不能保证能够在所有系统上请求窗口大小， 我们将提供获取窗口大小的方法。
+\item 策略是将光标定位在屏幕的右下角， 然后使用转义序列来查询光标的位置。 这告诉我们屏幕上必须有多少行和列。 
+\end{DoxyItemize}
+\end{DoxyNote}
+\Hypertarget{main_8c_afd2ade8d4e20fc9e78850fa3ccd61ef3}\label{main_8c_afd2ade8d4e20fc9e78850fa3ccd61ef3} 
+\index{main.c@{main.c}!is\_separator@{is\_separator}}
+\index{is\_separator@{is\_separator}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{is\_separator()}{is\_separator()}}
+{\footnotesize\ttfamily int is\+\_\+separator (\begin{DoxyParamCaption}\item[{int}]{c }\end{DoxyParamCaption})}
+
+
+
+是否为分隔符 
+
+
+\begin{DoxyParams}{参数}
+{\em c} & 字符 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+int 
+\end{DoxyReturn}
+
+
+\doxysubsection{变量说明}
+\Hypertarget{main_8c_aef5b2ca383b2d34d19d448e632bb4f1e}\label{main_8c_aef5b2ca383b2d34d19d448e632bb4f1e} 
+\index{main.c@{main.c}!C\_HL\_EXT@{C\_HL\_EXT}}
+\index{C\_HL\_EXT@{C\_HL\_EXT}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{C\_HL\_EXT}{C\_HL\_EXT}}
+{\footnotesize\ttfamily char\texorpdfstring{$\ast$}{*} C\+\_\+\+HL\+\_\+\+EXT\mbox{[}$\,$\mbox{]} = \{"{}.c"{}, "{}.h"{}, "{}.cpp"{}, NULL\}}
+
+C拓展文件后缀 \Hypertarget{main_8c_a3e9fdd221dff5eced4ccf43705fe9414}\label{main_8c_a3e9fdd221dff5eced4ccf43705fe9414} 
+\index{main.c@{main.c}!C\_HL\_KEY@{C\_HL\_KEY}}
+\index{C\_HL\_KEY@{C\_HL\_KEY}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{C\_HL\_KEY}{C\_HL\_KEY}}
+{\footnotesize\ttfamily char\texorpdfstring{$\ast$}{*} C\+\_\+\+HL\+\_\+\+KEY\mbox{[}$\,$\mbox{]}}
+
+{\bfseries 初始值\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}switch"{}},\ \textcolor{stringliteral}{"{}if"{}},\ \textcolor{stringliteral}{"{}while"{}},\ \textcolor{stringliteral}{"{}for"{}},\ \textcolor{stringliteral}{"{}break"{}},\ \textcolor{stringliteral}{"{}continue"{}},\ \textcolor{stringliteral}{"{}return"{}},\ \textcolor{stringliteral}{"{}else"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}struct"{}},\ \textcolor{stringliteral}{"{}union"{}},\ \textcolor{stringliteral}{"{}typedef"{}},\ \textcolor{stringliteral}{"{}static"{}},\ \textcolor{stringliteral}{"{}enum"{}},\ \textcolor{stringliteral}{"{}class"{}},\ \textcolor{stringliteral}{"{}case"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}int|"{}},\ \textcolor{stringliteral}{"{}long|"{}},\ \textcolor{stringliteral}{"{}double|"{}},\ \textcolor{stringliteral}{"{}float|"{}},\ \textcolor{stringliteral}{"{}char|"{}},\ \textcolor{stringliteral}{"{}unsigned|"{}},\ \textcolor{stringliteral}{"{}signed|"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}void|"{}},\ NULL}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+C拓展文件关键词 \Hypertarget{main_8c_ab528a290dca979d323e7f394addcda06}\label{main_8c_ab528a290dca979d323e7f394addcda06} 
+\index{main.c@{main.c}!HLDB@{HLDB}}
+\index{HLDB@{HLDB}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{HLDB}{HLDB}}
+{\footnotesize\ttfamily \mbox{\hyperlink{main_8c_a4b331922880c1076c8a24808e021a1d8}{esyn\+\_\+t}} HLDB\mbox{[}$\,$\mbox{]}}
+
+{\bfseries 初始值\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}c"{}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{main_8c_aef5b2ca383b2d34d19d448e632bb4f1e}{C\_HL\_EXT}},\ \mbox{\hyperlink{main_8c_a3e9fdd221dff5eced4ccf43705fe9414}{C\_HL\_KEY}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}//"{}},\ \textcolor{stringliteral}{"{}/*"{}},\ \textcolor{stringliteral}{"{}*/"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ HL\_SYN\_NUMBERS\ |\ HL\_SYN\_STRINGS}
+\DoxyCodeLine{\ \ \ \ \},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+语法突出数据库 

@@ -1,0 +1,6 @@
+[
+{
+  "directory": "/home/lexer/item/texc",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-O3", "-std=c99", "-DNDEBUG", "-o", "build/.objs/texc/linux/x86_64/release/src/main.c.o", "src/main.c"],
+  "file": "src/main.c"
+}]

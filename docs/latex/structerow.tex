@@ -1,0 +1,82 @@
+\doxysection{erow结构体 参考}
+\hypertarget{structerow}{}\label{structerow}\index{erow@{erow}}
+
+
+编辑器行  
+
+
+\doxysubsubsection*{Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{structerow_a33daa46412c006cdca26507154f82532}{idx}}
+\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structerow_a5bc596dae31abbfbf1519c637da32a0d}{c}}
+\item 
+int \mbox{\hyperlink{structerow_af250a1ef8cca88d762366d4f7e92f61c}{len}}
+\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structerow_a10ba86f063a54e241396b24e5c582599}{render}}
+\item 
+int \mbox{\hyperlink{structerow_a7f8cb5d4c31bd804630e8b1ef7df1877}{rlen}}
+\item 
+unsigned char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structerow_a3620022935ac561cf84dc3c0f9bfc48e}{hl}}
+\item 
+int \mbox{\hyperlink{structerow_a7b922b08b9155f6d477d0146fecc48c8}{hl\+\_\+open\+\_\+comment}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+编辑器行 
+
+\begin{DoxyNote}{注解}
+将一行文本存储为指向动态分配的字符数据的指针和其长度 
+\end{DoxyNote}
+
+
+\doxysubsection{类成员变量说明}
+\Hypertarget{structerow_a5bc596dae31abbfbf1519c637da32a0d}\label{structerow_a5bc596dae31abbfbf1519c637da32a0d} 
+\index{erow@{erow}!c@{c}}
+\index{c@{c}!erow@{erow}}
+\doxysubsubsection{\texorpdfstring{c}{c}}
+{\footnotesize\ttfamily char\texorpdfstring{$\ast$}{*} erow\+::c}
+
+动态分配的字符数据的字符串指针 \Hypertarget{structerow_a3620022935ac561cf84dc3c0f9bfc48e}\label{structerow_a3620022935ac561cf84dc3c0f9bfc48e} 
+\index{erow@{erow}!hl@{hl}}
+\index{hl@{hl}!erow@{erow}}
+\doxysubsubsection{\texorpdfstring{hl}{hl}}
+{\footnotesize\ttfamily unsigned char\texorpdfstring{$\ast$}{*} erow\+::hl}
+
+语法高亮 \Hypertarget{structerow_a7b922b08b9155f6d477d0146fecc48c8}\label{structerow_a7b922b08b9155f6d477d0146fecc48c8} 
+\index{erow@{erow}!hl\_open\_comment@{hl\_open\_comment}}
+\index{hl\_open\_comment@{hl\_open\_comment}!erow@{erow}}
+\doxysubsubsection{\texorpdfstring{hl\_open\_comment}{hl\_open\_comment}}
+{\footnotesize\ttfamily int erow\+::hl\+\_\+open\+\_\+comment}
+
+布尔：高亮是否未闭合 \Hypertarget{structerow_a33daa46412c006cdca26507154f82532}\label{structerow_a33daa46412c006cdca26507154f82532} 
+\index{erow@{erow}!idx@{idx}}
+\index{idx@{idx}!erow@{erow}}
+\doxysubsubsection{\texorpdfstring{idx}{idx}}
+{\footnotesize\ttfamily int erow\+::idx}
+
+文件中自己的索引 \Hypertarget{structerow_af250a1ef8cca88d762366d4f7e92f61c}\label{structerow_af250a1ef8cca88d762366d4f7e92f61c} 
+\index{erow@{erow}!len@{len}}
+\index{len@{len}!erow@{erow}}
+\doxysubsubsection{\texorpdfstring{len}{len}}
+{\footnotesize\ttfamily int erow\+::len}
+
+字符串长度 \Hypertarget{structerow_a10ba86f063a54e241396b24e5c582599}\label{structerow_a10ba86f063a54e241396b24e5c582599} 
+\index{erow@{erow}!render@{render}}
+\index{render@{render}!erow@{erow}}
+\doxysubsubsection{\texorpdfstring{render}{render}}
+{\footnotesize\ttfamily char\texorpdfstring{$\ast$}{*} erow\+::render}
+
+指向需要渲染的字符串 \Hypertarget{structerow_a7f8cb5d4c31bd804630e8b1ef7df1877}\label{structerow_a7f8cb5d4c31bd804630e8b1ef7df1877} 
+\index{erow@{erow}!rlen@{rlen}}
+\index{rlen@{rlen}!erow@{erow}}
+\doxysubsubsection{\texorpdfstring{rlen}{rlen}}
+{\footnotesize\ttfamily int erow\+::rlen}
+
+渲染内容长度 
+
+该结构体的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{main_8c}{main.\+c}}\end{DoxyCompactItemize}

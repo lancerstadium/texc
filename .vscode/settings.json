@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "random": "c",
+        "stdio.h": "c",
+        "ioctl.h": "c",
+        "*.tcc": "c",
+        "string": "c",
+        "istream": "c"
+    }
+}

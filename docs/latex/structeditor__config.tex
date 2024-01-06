@@ -1,0 +1,149 @@
+\doxysection{editor\+\_\+config结构体 参考}
+\hypertarget{structeditor__config}{}\label{structeditor__config}\index{editor\_config@{editor\_config}}
+
+
+编辑器配置结构体，保存了编辑器的信息。  
+
+
+\doxysubsubsection*{Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{structeditor__config_a7006dc0eeeb38ea909e4c27e19d52501}{screen\+\_\+rows}}
+\item 
+int \mbox{\hyperlink{structeditor__config_ac5c95616bb5757257b63ec1b33bc4292}{screen\+\_\+cols}}
+\item 
+int \mbox{\hyperlink{structeditor__config_af615c67ef3a789ad2c1ed364b4748742}{cursor\+\_\+x}}
+\item 
+int \mbox{\hyperlink{structeditor__config_aefea36e3b80e05f88d733e90850dc813}{cursor\+\_\+y}}
+\item 
+int \mbox{\hyperlink{structeditor__config_a11a9fca28ef11a6cc29f9367139d236d}{render\+\_\+x}}
+\item 
+int \mbox{\hyperlink{structeditor__config_a9ea1a76f97e9c02156e24f0756fe2a8d}{render\+\_\+y}}
+\item 
+int \mbox{\hyperlink{structeditor__config_ae6c2522290870843270b828f3d194394}{num\+\_\+rows}}
+\item 
+int \mbox{\hyperlink{structeditor__config_a27e4878c4ca26da2b7f1aa0baad2affa}{row\+\_\+off}}
+\item 
+int \mbox{\hyperlink{structeditor__config_ab8f3ca40ceee47d70f847b84fc8aff27}{clo\+\_\+off}}
+\item 
+int \mbox{\hyperlink{structeditor__config_a5906aca1ecc686ca9a756f7655aa3ed5}{dirty}}
+\item 
+\mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structeditor__config_a72041eeb5a46f1bf1643ec56bf1a5634}{row}}
+\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structeditor__config_ad5176b8d5077f5a9c6613c830c0b2d8a}{filename}}
+\item 
+char \mbox{\hyperlink{structeditor__config_ac78d07ea0fd19387381402e5933578a5}{status\+\_\+msg}} \mbox{[}80\mbox{]}
+\item 
+time\+\_\+t \mbox{\hyperlink{structeditor__config_aa995efec32a7fcb121e4ed75bc0c6e21}{status\+\_\+msg\+\_\+time}}
+\item 
+\mbox{\hyperlink{main_8c_a4b331922880c1076c8a24808e021a1d8}{esyn\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structeditor__config_a1bd443b560afc0d3076f67baec1498ca}{syntax}}
+\item 
+struct termios \mbox{\hyperlink{structeditor__config_aa937f5ac2b018ca324632d2ca9549d28}{orig\+\_\+termios}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+编辑器配置结构体，保存了编辑器的信息。 
+
+\doxysubsection{类成员变量说明}
+\Hypertarget{structeditor__config_ab8f3ca40ceee47d70f847b84fc8aff27}\label{structeditor__config_ab8f3ca40ceee47d70f847b84fc8aff27} 
+\index{editor\_config@{editor\_config}!clo\_off@{clo\_off}}
+\index{clo\_off@{clo\_off}!editor\_config@{editor\_config}}
+\doxysubsubsection{\texorpdfstring{clo\_off}{clo\_off}}
+{\footnotesize\ttfamily int editor\+\_\+config\+::clo\+\_\+off}
+
+编辑器列偏移量 \Hypertarget{structeditor__config_af615c67ef3a789ad2c1ed364b4748742}\label{structeditor__config_af615c67ef3a789ad2c1ed364b4748742} 
+\index{editor\_config@{editor\_config}!cursor\_x@{cursor\_x}}
+\index{cursor\_x@{cursor\_x}!editor\_config@{editor\_config}}
+\doxysubsubsection{\texorpdfstring{cursor\_x}{cursor\_x}}
+{\footnotesize\ttfamily int editor\+\_\+config\+::cursor\+\_\+x}
+
+光标 x 轴坐标 \Hypertarget{structeditor__config_aefea36e3b80e05f88d733e90850dc813}\label{structeditor__config_aefea36e3b80e05f88d733e90850dc813} 
+\index{editor\_config@{editor\_config}!cursor\_y@{cursor\_y}}
+\index{cursor\_y@{cursor\_y}!editor\_config@{editor\_config}}
+\doxysubsubsection{\texorpdfstring{cursor\_y}{cursor\_y}}
+{\footnotesize\ttfamily int editor\+\_\+config\+::cursor\+\_\+y}
+
+光标 y 轴坐标 \Hypertarget{structeditor__config_a5906aca1ecc686ca9a756f7655aa3ed5}\label{structeditor__config_a5906aca1ecc686ca9a756f7655aa3ed5} 
+\index{editor\_config@{editor\_config}!dirty@{dirty}}
+\index{dirty@{dirty}!editor\_config@{editor\_config}}
+\doxysubsubsection{\texorpdfstring{dirty}{dirty}}
+{\footnotesize\ttfamily int editor\+\_\+config\+::dirty}
+
+脏读标志 \Hypertarget{structeditor__config_ad5176b8d5077f5a9c6613c830c0b2d8a}\label{structeditor__config_ad5176b8d5077f5a9c6613c830c0b2d8a} 
+\index{editor\_config@{editor\_config}!filename@{filename}}
+\index{filename@{filename}!editor\_config@{editor\_config}}
+\doxysubsubsection{\texorpdfstring{filename}{filename}}
+{\footnotesize\ttfamily char\texorpdfstring{$\ast$}{*} editor\+\_\+config\+::filename}
+
+文件名 \Hypertarget{structeditor__config_ae6c2522290870843270b828f3d194394}\label{structeditor__config_ae6c2522290870843270b828f3d194394} 
+\index{editor\_config@{editor\_config}!num\_rows@{num\_rows}}
+\index{num\_rows@{num\_rows}!editor\_config@{editor\_config}}
+\doxysubsubsection{\texorpdfstring{num\_rows}{num\_rows}}
+{\footnotesize\ttfamily int editor\+\_\+config\+::num\+\_\+rows}
+
+编辑器总行数 \Hypertarget{structeditor__config_aa937f5ac2b018ca324632d2ca9549d28}\label{structeditor__config_aa937f5ac2b018ca324632d2ca9549d28} 
+\index{editor\_config@{editor\_config}!orig\_termios@{orig\_termios}}
+\index{orig\_termios@{orig\_termios}!editor\_config@{editor\_config}}
+\doxysubsubsection{\texorpdfstring{orig\_termios}{orig\_termios}}
+{\footnotesize\ttfamily struct termios editor\+\_\+config\+::orig\+\_\+termios}
+
+系统终端属性 \Hypertarget{structeditor__config_a11a9fca28ef11a6cc29f9367139d236d}\label{structeditor__config_a11a9fca28ef11a6cc29f9367139d236d} 
+\index{editor\_config@{editor\_config}!render\_x@{render\_x}}
+\index{render\_x@{render\_x}!editor\_config@{editor\_config}}
+\doxysubsubsection{\texorpdfstring{render\_x}{render\_x}}
+{\footnotesize\ttfamily int editor\+\_\+config\+::render\+\_\+x}
+
+渲染 x 轴坐标 \Hypertarget{structeditor__config_a9ea1a76f97e9c02156e24f0756fe2a8d}\label{structeditor__config_a9ea1a76f97e9c02156e24f0756fe2a8d} 
+\index{editor\_config@{editor\_config}!render\_y@{render\_y}}
+\index{render\_y@{render\_y}!editor\_config@{editor\_config}}
+\doxysubsubsection{\texorpdfstring{render\_y}{render\_y}}
+{\footnotesize\ttfamily int editor\+\_\+config\+::render\+\_\+y}
+
+渲染 y 轴坐标 \Hypertarget{structeditor__config_a72041eeb5a46f1bf1643ec56bf1a5634}\label{structeditor__config_a72041eeb5a46f1bf1643ec56bf1a5634} 
+\index{editor\_config@{editor\_config}!row@{row}}
+\index{row@{row}!editor\_config@{editor\_config}}
+\doxysubsubsection{\texorpdfstring{row}{row}}
+{\footnotesize\ttfamily \mbox{\hyperlink{main_8c_a3286f23de1bf8554398edc8987b6d587}{erow\+\_\+t}}\texorpdfstring{$\ast$}{*} editor\+\_\+config\+::row}
+
+编辑器行 \Hypertarget{structeditor__config_a27e4878c4ca26da2b7f1aa0baad2affa}\label{structeditor__config_a27e4878c4ca26da2b7f1aa0baad2affa} 
+\index{editor\_config@{editor\_config}!row\_off@{row\_off}}
+\index{row\_off@{row\_off}!editor\_config@{editor\_config}}
+\doxysubsubsection{\texorpdfstring{row\_off}{row\_off}}
+{\footnotesize\ttfamily int editor\+\_\+config\+::row\+\_\+off}
+
+编辑器行偏移量 \Hypertarget{structeditor__config_ac5c95616bb5757257b63ec1b33bc4292}\label{structeditor__config_ac5c95616bb5757257b63ec1b33bc4292} 
+\index{editor\_config@{editor\_config}!screen\_cols@{screen\_cols}}
+\index{screen\_cols@{screen\_cols}!editor\_config@{editor\_config}}
+\doxysubsubsection{\texorpdfstring{screen\_cols}{screen\_cols}}
+{\footnotesize\ttfamily int editor\+\_\+config\+::screen\+\_\+cols}
+
+屏幕列数 \Hypertarget{structeditor__config_a7006dc0eeeb38ea909e4c27e19d52501}\label{structeditor__config_a7006dc0eeeb38ea909e4c27e19d52501} 
+\index{editor\_config@{editor\_config}!screen\_rows@{screen\_rows}}
+\index{screen\_rows@{screen\_rows}!editor\_config@{editor\_config}}
+\doxysubsubsection{\texorpdfstring{screen\_rows}{screen\_rows}}
+{\footnotesize\ttfamily int editor\+\_\+config\+::screen\+\_\+rows}
+
+屏幕行数 \Hypertarget{structeditor__config_ac78d07ea0fd19387381402e5933578a5}\label{structeditor__config_ac78d07ea0fd19387381402e5933578a5} 
+\index{editor\_config@{editor\_config}!status\_msg@{status\_msg}}
+\index{status\_msg@{status\_msg}!editor\_config@{editor\_config}}
+\doxysubsubsection{\texorpdfstring{status\_msg}{status\_msg}}
+{\footnotesize\ttfamily char editor\+\_\+config\+::status\+\_\+msg\mbox{[}80\mbox{]}}
+
+状态栏信息 \Hypertarget{structeditor__config_aa995efec32a7fcb121e4ed75bc0c6e21}\label{structeditor__config_aa995efec32a7fcb121e4ed75bc0c6e21} 
+\index{editor\_config@{editor\_config}!status\_msg\_time@{status\_msg\_time}}
+\index{status\_msg\_time@{status\_msg\_time}!editor\_config@{editor\_config}}
+\doxysubsubsection{\texorpdfstring{status\_msg\_time}{status\_msg\_time}}
+{\footnotesize\ttfamily time\+\_\+t editor\+\_\+config\+::status\+\_\+msg\+\_\+time}
+
+状态栏信息：时间 \Hypertarget{structeditor__config_a1bd443b560afc0d3076f67baec1498ca}\label{structeditor__config_a1bd443b560afc0d3076f67baec1498ca} 
+\index{editor\_config@{editor\_config}!syntax@{syntax}}
+\index{syntax@{syntax}!editor\_config@{editor\_config}}
+\doxysubsubsection{\texorpdfstring{syntax}{syntax}}
+{\footnotesize\ttfamily \mbox{\hyperlink{main_8c_a4b331922880c1076c8a24808e021a1d8}{esyn\+\_\+t}}\texorpdfstring{$\ast$}{*} editor\+\_\+config\+::syntax}
+
+语法突出信息 
+
+该结构体的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{main_8c}{main.\+c}}\end{DoxyCompactItemize}
